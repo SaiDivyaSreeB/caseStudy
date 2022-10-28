@@ -1,0 +1,19 @@
+<nav class="navbar">
+    <input class="form-control" type="text" name="fullname"[(ngModel)]="fullname"(ngModelChange)="search()"placeholder="enter washer name to search">
+</nav>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Waher name</th>
+            <th>Washer email</th>
+            <th>Assign Washer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let washer of washers let i =index">
+            <td>{{washer.fullname}}</td>
+            <td>{{washer.email}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="assign(washer.fullname)">Assign washer</button></td>
+        </tr>
+    </tbody>
+</table>

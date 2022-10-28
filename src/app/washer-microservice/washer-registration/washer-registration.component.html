@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>Registration Form</span></div>
+          <form [formGroup]="RegistrationForm">
+          <div class="row">
+            <i class="fas fa-user"></i>
+           <input type="email" placeholder="Email" formControlName="email" [(ngModel)]="washerDetails.email">
+           <small [class.d-none]="RegistrationForm.controls['email'].valid||RegistrationForm.controls['email'].untouched" class="text-danger">
+            provide valid email address
+          </small>
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" formControlName="password" [(ngModel)]="washerDetails.password">
+            <small [class.d-none]="RegistrationForm.controls['password'].valid||RegistrationForm.controls['password'].untouched" class="text-danger">
+                password should contain atleast one digit, one small letter,8-30 characters length
+              </small>
+          </div>
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Fullname" formControlName="fullname" [(ngModel)]="washerDetails.fullname">
+            <small [class.d-none]="RegistrationForm.controls['fullname'].valid||RegistrationForm.controls['fullname'].untouched" class="text-danger">
+                Name is required
+              </small>
+          </div>
+          <div class="row button">
+              <button type="button" value="Register" (click)="registerNow()"[disabled]="RegistrationForm.invalid">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
+
+

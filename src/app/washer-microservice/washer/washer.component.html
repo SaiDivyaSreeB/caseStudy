@@ -1,0 +1,60 @@
+      <!--<p>sample works!</p>-->
+<!--<!DOCTYPE html>
+<html lang="en">-->
+<head>
+	<meta charset="UTF-8"><!--href="styles.css"-->
+	<title>Side Navigation Bar</title>
+	<link rel="stylesheet" >
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+            <!-- <li><a routerLink="/washer/dashboard">Dashboard</a></li> -->
+            <li><a routerLink="/washer/myOrders"><!--<i class="fas fa-address-card"></i>-->My pending Orders</a></li>
+            <li><a routerLink="/washer/unassignedOrders"><!--<i class="fas fa-project-diagram"></i>-->Unassined Orders</a></li>
+            <!-- <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
+            <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
+            <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li> -->
+        </ul> 
+        <!-- <div class="social_media">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+      </div> -->
+    </div>
+   <div class="main_content">
+          <div class="header" >Welcome {{washerName}}!! Have a nice day.
+            <!-- <span>
+              
+              <div style="text-align: right;" ><a class="my-menu" (click)="logout()" routerLink="/home">Logout</a></div>
+            </span> -->
+            <span>
+              <div class="dropdown my-menu" >
+                <div class="alignment">
+                <a class="btn btn-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  Profile
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink" >
+                    <li>{{washerName}}</li>
+                    <li>{{washerEmail}}</li>
+                   <li><a class="dropdown-item" (click)="logout()" routerLink="/home">Logout</a></li>
+                </ul>
+               </div>
+              </div>
+            </span>
+          </div> 		
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+</body>
+<!--</html>-->
+       
+ 
+
+

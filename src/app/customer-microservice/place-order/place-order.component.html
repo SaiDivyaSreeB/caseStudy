@@ -1,0 +1,104 @@
+<div *ngIf="role=='WASHER';else elseblock">
+  <h2> Logout and login as user.</h2>
+</div>
+<ng-template #elseblock>
+<div class="container"style="overflow:auto;height:100%">
+
+  <div class="form"style="overflow:auto;padding-top:5px;height:auto">
+    <h1 >Order now</h1>
+    <div class="childcontainer"style="padding-left:90px;overflow:auto;justify-content:center;margin-left:250px;margin-right:70px;">
+     
+    <div class="image"style="float:left;width:30%;overflow:auto;height:450px;padding-right:1px;padding-top:70px">
+      <img src="\assets\Images\placeOrder.jpg"style="width:260px;height:83%;">
+    </div>
+    <div class="content"style="overflow:auto;width:270px;border:1px solid black;border-radius:5px;box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);">
+     
+    <form name="form" [formGroup]="orderForm" style="margin-left:0px;" >
+    <div class="row">
+      <!---<label for="Email">span> Email Id </span> -->
+        <input type="hidden" name="email" formControlName="email"  [(ngModel)]="order.userEmailId"><!--type=email-->
+        <!-- <small [class.d-none]="orderForm.controls['email'].valid||orderForm.controls['email'].untouched" class="text-danger">
+          provide valid email address
+        </small> -->
+        <!-- <small [class.d-none]="input.ng-valid || name.untouched">Name is required</small> -->
+      <!-- </label> -->
+    </div>
+    
+    <div class="row">
+      <!-- <label for="Washer Name"><span> Washer name </span> -->
+        <input type="hidden" formControlName="name" [(ngModel)]="order.washerName">
+        <!-- <small [class.d-none]="orderForm.controls['name'].valid||orderForm.controls['name'].untouched" class="text-danger">
+          washer name is required
+        </small>
+      </label> -->
+    </div>
+     <!-- <div class="row">
+      <label for="Pack"><span> Wash Pack </span>
+        <select name="pack" id="Pack" formControlName:"washpack" [(ngModel)]="order.washpack" >
+       <option *ngFor="let Pack of packs" value="{{Pack.name}}">{{Pack.name}}</option>
+    </select>
+        </label>
+    </div>  -->
+    <div class="row">
+      <label for="Pack"><span>Wash Pack</span>
+      <!-- <input type="text" formControlName="Washpack" [(ngModel)="washpack"> -->
+      <select name="pack" id="Pack"formControlName="Washpack" [(ngModel)]="washpack"style="width:10.5rem"> 
+        <option *ngFor="let Pack of packs" value="{{Pack.name}}">{{Pack.name}}</option>
+      </select>
+      <small [class.d-none]="orderForm.controls['Washpack'].valid||orderForm.controls['Washpack'].untouched" class="text-danger">
+        washpack is required
+     </small>
+    </label>
+    </div>
+    <div class="row">
+      <label for="Phone"><span> Phone No </span>
+        <input type="tel" formControlName="phone" [(ngModel)]="order.phoneNo">
+        <!-- <small *ngIf="orderForm.controls['phone'].invalid||orderForm.controls['phone'].touched" class="text-danger">
+          mobile number required
+        </small> -->
+        <small [class.d-none]="orderForm.controls['phone'].valid||orderForm.controls['phone'].untouched" class="text-danger">
+          mobile number must be 10 digits
+        </small>
+        
+    </label>
+    </div>
+    <div class="row">
+      <label for="Address"><span> Address </span>
+        <input type="text" formControlName="address" [(ngModel)]="order.areapincode">
+        <small [class.d-none]="orderForm.controls['Washpack'].valid||orderForm.controls['Washpack'].untouched" class="text-danger">
+          address is required
+        </small>
+    </label>
+    </div>
+    <div class="row">
+        <label for="Car"><span>Car</span>
+          <input type="text" formControlName="carname" [(ngModel)]="x.name">
+          <small [class.d-none]="orderForm.controls['carname'].valid||orderForm.controls['carname'].untouched" class="text-danger">
+            car name is required
+          </small>
+      </label>
+    </div>
+    <div class="row">
+        <label for="Car model"><span>Car type</span>
+          <input type="text" formControlName="model" [(ngModel)]="x.model">
+          <small [class.d-none]="orderForm.controls['model'].valid||orderForm.controls['model'].untouched" class="text-danger">
+            car model is required
+          </small>
+      </label>
+    </div>
+    <div class="row">
+        <label for="Addon"><span>Suggestion</span>
+        <input type="text" formControlName="anyaddon" [(ngModel)]="order.addon" >
+        </label>
+    </div>
+    <div class="row button">
+        <!-- <input type="submit" value="Register" (click)="confirm()"[disabled]="orderForm.invalid"> -->
+      <!-- <button type="submit" value="Register" (click)="registerNow()"[disabled]="RegistrationForm.invalid"><a routerLink="/washer">Register</a></button> -->
+      <button type="button" class="btn btn-primary" (click)="done()"[disabled]="orderForm.invalid">Place order</button>
+    </div>
+ </form>
+</div>
+</div>
+  </div>
+</div>
+</ng-template>

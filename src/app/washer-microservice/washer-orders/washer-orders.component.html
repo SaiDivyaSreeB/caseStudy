@@ -1,0 +1,45 @@
+<div *ngIf="role=='USER'">
+  <h2> Logout and login as user or create washer account</h2>
+</div>
+<div *ngIf="flag&&(role!='USER')">
+  <!-- <img src="\assets\Images\emptyCart.png"class="cartempty"> -->
+  <img src="\assets\Images\logo.jpg"class="cartempty">
+  <h1  style="color:black">No pending orders </h1>
+</div>
+<div *ngIf="!flag&&(role!='USER')">
+<div class="container">
+<h1 style="text-align: center;">My Orders</h1>
+  <div class="row"style="margin-left:65px">
+   
+   <div class="col-lg-4"style="width: 18rem;"*ngFor="let order of orders| paginate:{itemsPerPage:4,currentPage:p}; let i= index">
+  <div class="card" >
+    <div class="card-body">
+      <h5 class="card-title">{{i+1}}.</h5>
+      <h6 class="card-subtitle mb-2 text-muted"></h6>
+      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      <p class="card-text">Order Id: {{order.orderId}}</p>
+      <p class="card-text">User Email: {{order.userEmailId}}</p>
+      <p class="card-text">{{order.washerName}}</p>
+      <p class="card-text">Washpack: {{order.washpack}}</p>
+      <p class="card-text">Phone: {{order.phoneNo}}</p>
+      <p class="card-text">Area pincode: {{order.areapincode}}</p>
+      <p class="card-text">Status: {{order.status}}</p>
+      <!-- <p class="card-text">{{order.cars.id}}</p> -->
+      <p class="card-text">Car: {{order.cars.name}}</p>
+      <p class="card-text">Car Type: {{order.cars.model}}</p>
+      <p class="card-text">Suggestion: {{order.addon}}</p>
+      <button type="button" class="btn btn-danger" (click)="reject(order.orderId,i)" width="89px">Reject</button><!--hide(i);-->
+      <button type="button" class="btn btn-success" (click)="completed(order.orderId,i)">completed</button><!--hide(i);-->
+      <!-- <a href="#" class="card-link" (click)="hide(i)">Card link</a> -->
+      <!-- <a href="#" class="card-link">UPDATE STATUS</a> -->
+      </div>
+  </div>
+ </div> 
+</div>
+</div>
+<div style="padding-top:50px">
+  <pagination-controls (pageChange)="p=$event"style="text-align:center"></pagination-controls>
+</div> 
+</div>
+<!-- </ng-template> -->
+ 

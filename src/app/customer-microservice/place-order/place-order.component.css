@@ -1,0 +1,100 @@
+input.ng-invalid{
+    border: 0.2px solid red;
+  }
+  
+  input.ng-valid{
+    border: 1px solid green;
+  }
+  select.ng-invalid{
+    border: 0.2px solid red;
+  }
+  h1{
+    text-align: center;
+  }
+   form{
+    margin-top: 6px;
+     display: flex;  
+      flex-direction: column; 
+    /* justify-content: space-around; */
+    align-items: center;}
+    /* border: 2px solid #e3e3e3; */
+    /* width: 680px; */
+    /* margin: 5% auto;
+    /* padding: 0px;
+    text-align: left; */
+    /* float: left; */
+  /* } */
+  
+   
+  label {
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+  }
+  /* div {
+    margin: 10px;
+  } */
+  input,select{
+    margin:6px;
+  }
+  label{
+    margin:3px;
+    
+  }
+  select{
+  height: 25px;
+  }
+  button{
+  
+    padding:8px;
+    margin-bottom: 15px;
+    background-color: #3085d6;
+   
+  }
+  
+  button:hover{
+    color: black;
+  }
+  
+  button:disabled{
+    background-color: grey;
+    color: black;
+  }
+
+/* .form{
+ 
+  width: 40%;
+  /* flex:1; */
+/*}*/
+/*.container{
+  display: flex;
+ 
+} */
+/* 
+.image{
+  flex:1;
+width:30%
+
+  
+}
+
+img{
+  border:1px solid black;
+  height: 100%;
+  width:100%;
+  padding-right: 0px;
+  align-self:right;
+  margin-right: 0px;
+  padding-right: 0px;
+} */
+
+h1{
+  font-family:'sans-serif' ;
+    color: blueviolet;
+      font-size:30px;
+      font-weight:bold;text-shadow:  2px 2px rgb(232, 219, 244);/*, ,, , ,'Lucida Grande''Geneva''Verdana' */
+      margin-bottom:50px;text-align: center;
+    }
+    .insidechild{
+      margin:100px
+    }

@@ -1,0 +1,48 @@
+button{
+   
+     border-radius: 10px;
+    
+     background-color: rgb(113, 25, 195);
+     color: white;
+    
+     border:none;
+    
+    
+   }
+   
+   button:hover{
+     background-color: rgba(0,0,0,0.5);
+    
+     color:white
+   }
+   
+   button:hover a{
+     color: white
+   }
+
+   .card{
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  /* padding: 14px 80px 18px 36px; */
+  cursor: pointer;
+}
+
+.card:hover{
+     transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+h1{
+  font-family:'sans-serif' ;
+    color: blueviolet;
+      font-size:30px;
+      font-weight:bold;text-shadow:  2px 2px rgb(232, 219, 244);/*, ,, , ,'Lucida Grande''Geneva''Verdana' */
+      margin-bottom:5px;text-align: center;margin-top:10px;
+}
+.imgcontainer{
+  float:left
+ }
+ .packcontainer{
+  float:left
+ }

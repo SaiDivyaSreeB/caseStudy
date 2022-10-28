@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div *ngIf="role=='WASHER'">
+      <h2> Logout and login as user.</h2>
+    </div>
+  <div *ngIf="flag&&(role!='WASHER')">
+    <img src="\assets\Images\logo.jpg"class="cartempty">
+    <h1>No orders exist</h1>
+  </div>
+ 
+  <div *ngIf="!flag&&(role!='WASHER')">
+    <nav class="navbar">
+      <input class="form-control" type="text" name="washerpack" [(ngModel)]="washpack" (ngModelChange)="Search()" placeholder="Enter washpack to search">
+    </nav>
+<div class="container" >
+  <h1>My Orders</h1>
+  <div class="row"style="margin-left:65px">
+<div class="col-lg-4"style="width: 18rem"*ngFor="let order of orders | paginate:{itemsPerPage:4,currentPage:p}; let i=index " ><!--};-->
+      <div class="card" >
+        <div class="card-body">
+        <h5 class="card-title">{{i+1}}.</h5>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <p class="card-text">Order Id: {{order.orderId}}</p>
+        <p class="card-text">User Email: {{order.userEmailId}}</p>
+        <p class="card-text">Washpack: {{order.washpack}}</p>
+        <p class="card-text">Phone: {{order.phoneNo}}</p>
+        <p class="card-text">Address: {{order.areapincode}}</p>
+        <p class="card-text" style="font-weight: bold;">Status: {{order.status}}</p>
+        <p class="card-text">Car: {{order.cars.name}}</p>
+        <p class="card-text">Car Type: {{order.cars.model}}</p>
+        <p class="card-text">Suggestion: {{order.addon}}</p>
+        <button type="button" class="btn btn-danger" (click)="cancelOrder(order)" width="89px" [disabled]="cancelOrderDisable(order.status)">Cancel Order</button>
+        <button type="button" class="btn btn-primary" id="button"[disabled]="addRatingDisable(order.status)"(click)="addRating(order.washerName)" >add ratings</button>
+        <br>
+        <button type="button" class="btn btn-primary" id="button" (click)="edit(order)" [disabled]="updateRatingDisable(order.status)"style="margin:10px;margin-left:45px">Update details</button>
+        </div>
+    </div>
+ </div> 
+  <div style="padding-top:50px">
+    <pagination-controls (pageChange)="p=$event"style="text-align:center"></pagination-controls>
+    </div>  
+</div>
+</div>
+</div>
+<div class="popup">
+        <div class="popup-content">
+            <div style="padding:5px">
+           <img src="assets/Images/close.png" width=20px alt="Close" class="close" (click)="close()">
+          </div> 
+            <div class="update" style="padding-right:30px;">
+            <form [formGroup]="updateform">
+            <label for="i1">Phone No:</label>
+            <input type="text"id="i1"[(ngModel)]="Order.phoneNo"formControlName="phoneNo">
+            <br>
+            <label for="i2">Address:</label>
+            <input type="text"id="i2"[(ngModel)]="Order.areapincode"formControlName="Address">
+            <br>
+            <label for="i3">Car:</label>
+            <input type="text"id="i3"[(ngModel)]="Order.cars.name"formControlName="car">
+            <br>
+            <label for="i4">Car Type:</label>
+            <input type="text"id="i4"[(ngModel)]="Order.cars.model"formControlName="cartype">
+            <br>
+            <label for="i5">Addon:</label>
+            <input type="text"id="i5"[(ngModel)]="Order.addon"formControlName="addon"> 
+          </form>
+        </div> 
+              <div style="margin-top: 10px;">
+            <button type="button" class="btn btn-primary" [disabled]="updateform.invalid"(click)="updateOrder(Order.orderId,Order)">Update</button>
+          </div>
+      </div>
+    </div> 
+    <div class="popup-rating">
+        <div class="popup-rating-content">
+        <div style="padding:20px">
+       <img src="assets/Images/close.png" width=20px alt="Close" class="close" (click)="closeAddRating()"> 
+       </div>
+        <form [formGroup]="ratingform">
+        <div style="font-weight:bold">
+        {{Rating.washerName}}
+      </div>
+        <br>
+        <label for="comments">Feedback:</label>
+        <input id="comments" type="text"[(ngModel)]="Rating.comments"formControlName="feedback" >
+        </form>
+         <button mat-icon-button color="accent" *ngFor="let r of ratingArr;index as i"(click)="onClick(i)">
+          <mat-icon>
+            {{returnStar(i)}}
+          </mat-icon>
+         </button>
+         <br>
+         <br>
+        <button type="button" class="btn btn-primary" (click)="addRatingComment()">Submit</button>
+      </div>
+      </div>
+</body>
+ </html>

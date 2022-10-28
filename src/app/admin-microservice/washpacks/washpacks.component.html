@@ -1,0 +1,111 @@
+<!-- <div *ngIf="flag; else elseblock"> -->
+  <!-- <img src="\assets\Images\emptyCart.png"class="cartempty"> -->
+  <!-- <img src="\assets\Images\logo.jpg"class="cartempty">
+    <h1 style="color:black">No unassigned orders</h1> -->
+  <!-- <h1>No pending orders</h1> -->
+<!-- </div> -->
+ <!-- <div *ngIf="role!='ADMIN';else elseblock">
+  <h1 style="color:black">You must be admin to access this page</h1>
+</div> -->
+<div *ngIf="role!='ADMIN';else elseblock">
+  <h2>You must be admin to access this page. Logout and login as user</h2>
+</div>
+<ng-template #elseblock>
+  <div id="washpack">
+    <h1 style="margin-top:20px">Available Washpacks</h1>
+    <div *ngFor="let washpack of washpacks let i=index" id="pack"style="margin-top:20px"> <!-- style="width: 30rem"-->
+        <div class="card" style="width:20rem;text-align:center;">
+          <div class="card-body">
+            <h2 class="card-title">{{washpack.name}}</h2>
+          
+           
+                <div class="col"class="imgcontainer">
+              <img src="{{washpack.image}}" alt="Car" style="height:200px;width:280px">
+            </div>
+              
+            <p class="card-text">Cost: {{washpack.cost}}</p>
+            Description:
+            
+            <!-- <p *ngIf="washpack.description.length <= wordLimit"> {{washpack.description}}</p>
+            <p *ngIf="washpack.description.length > wordLimit && !showMore">
+              {{washpack.description.substring(0,wordLimit)}}....
+              <span (click)="showMore=true" class="font-weight-bold text-primary hand">show more</span>
+            </p>
+            <p *ngIf="washpack.description.length > wordLimit && showMore">
+              {{washpack.description}}
+              <span (click)="showMore=false" class="font-weight-bold text-primary hand">show less</span>
+            </p> -->
+            <p class="card-text">
+              <app-show-less-more [text]="washpack.description"[wordLimit]=60></app-show-less-more>
+            </p>
+            <button type="button" class="btn btn-danger" (click)="delete(washpack.id,i)" width="89px" >Delete</button><!--hide(i);-->
+            <button type="button" class="btn btn-primary" id="button" (click)="edit(washpack)" >Update</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  
+              <div class="popup">
+                <div class="popup-content">
+                  <div style="padding:5px">
+                    <img src="assets/Images/close.png" width=20px alt="Close" class="close" (click)="close()"> 
+                  </div>
+                  <form [formGroup]="updateForm"name="updateForm">
+                    <label for="i1"> Name:</label>
+                      <input type="text"id="i1"formControlName="packName"[(ngModel)]="Washpack.name">
+                    <br>
+                    <div>
+                      <label for="name"class="label"></label>
+                    <img [src]="Washpack.image"style="height:200px;width:260px;padding-left:0px;padding-right:0px;padding:10px;" >
+                    <input style="margin-left:250px;padding-bottom:10px;"type="file"(change)="onselectFile($event,'updateForm')">
+                    </div>
+                      <label for="i2" style="padding-bottom:10px">Cost:</label>
+                      <input type="text"id="i2"formControlName="packCost"[(ngModel)]="Washpack.cost">
+                    <br>
+                    <div class="textarea" >
+                      <label for="i3"> Description:</label>
+                      <textarea type="text"id="i3"formControlName="packDescription"[(ngModel)]="Washpack.description"></textarea>
+                    </div>  
+                  </form>
+                  <div style="padding-top: 10px;">
+                    <button type="button" class="btn btn-primary"[disabled]="updateForm.invalid" (click)="update(Washpack.id)" >Update details</button>
+                  </div>
+                </div>
+              </div>
+ 
+
+
+
+<div class="formContainer">
+<div id="form"style="margin-bottom:30px" style="padding:30px;">
+<form [formGroup]="AddForm"class="addform" name="AddForm" style="border:1px solid black;padding-left: 25px;">
+  <h1 style="text-align: center;padding-top: 25px;"> Add Washpack:</h1>
+  <div class="row">
+    <label for="name"class="label">Washpack : </label>
+   <input class="input" id="name"type="text" placeholder="washpack name" formControlName="packName" [(ngModel)]="pack.name"style="width:18rem">
+  </div>
+  <br>
+  
+  <div class="row">
+    <label for="name"class="label"></label>
+  <img [src]="url"style="height:200px;width:260px;padding-left:0px;padding-right:0px;border: 1px solid black;" >
+  <input style="margin-left:120px;padding: 30px;"type="file"(change)="onselectFile($event,'AddForm')">
+  </div>
+
+  <div class="row">
+    <label for="cost"class="label">cost : </label>
+   <input class="input" id="cost" type="text" placeholder="washpack cost" formControlName="packCost" [(ngModel)]="pack.cost"style="width:18rem">
+  </div>
+  <br>
+  <div class="row">
+    <label for="description"class="label">description : </label>
+    <input class="input" id="description" type="text" placeholder="washpack description" formControlName="packDescription" [(ngModel)]="pack.description"style="width:18rem">
+  </div >
+  <div style="padding-left: 135px;padding-bottom: 10px;padding-top: 10px;">
+  <button id="Button"type="button" class="btn btn-primary"[disabled]="AddForm.invalid" (click)="add()" style="width: 10rem;">Add</button>
+</div>
+</form>
+</div>
+</div>
+</ng-template>

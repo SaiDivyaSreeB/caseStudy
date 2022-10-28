@@ -1,0 +1,21 @@
+  .navbar-brand,.navbar-custom{ 
+  /* background-color: rgb(113, 25, 195); */
+   background-color: white;
+  
+  }
+  container-fluid,.navbar-toggler-icon,.navbar-toggler,collapse navbar-collapse{/*.navbar-brand,*//* .nav-link,*/
+  background-color: rgb(113, 25, 195);
+  /* color:white */
+ }
+ a{
+  color: rgb(113, 25, 195);
+ }
+ h1{
+  font-family:'sans-serif' ;
+  color: blueviolet;
+  font-weight:bold;text-shadow:  2px 2px rgb(232, 219, 244);/*, ,, , ,'Lucida Grande''Geneva''Verdana' */
+ }
+a:hover,button:hover{
+color:black;
+/* color: rgb(113, 25, 195); */
+}

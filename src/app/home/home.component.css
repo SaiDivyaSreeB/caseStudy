@@ -1,0 +1,268 @@
+/*.background{*/
+    /*background-image: url('../../assets/carwashing.jpg');*/
+   /* background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  .bgc{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mat-fab{
+    padding: 50px;
+  }
+  h1{
+    font-size: 30px;
+  }
+  .insider{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  
+  button{
+    border:none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+  }
+  
+  button:hover{
+    background-color: rgba(0,0,0,0.5);
+    color: white
+  }
+  
+  button:hover a{
+    color: white
+  }
+  */
+  /* img{
+    width: 1000px;
+    
+  }
+  .container{
+    position:relative;
+  /* width: */
+    /* max-width:1000px */
+    /* container {
+      position: relative;
+      width: 50%;
+    } */
+    
+    /* Make the image responsive */
+    /* .container img {
+      width: 100%;
+      height: auto;
+    } */
+    
+    /* Style the button and place it in the middle of the container/image */
+    /* .container .btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      background-color: #555;
+      color: white;
+      font-size: 16px;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    .container .btn:hover {
+      background-color: black;
+    } */
+    .about{
+      /* padding-top: 20px;
+      padding-left:120px; */
+      float:left;
+      width:80%;
+      height:100%;
+      text-align:center;
+      margin-left: 100px;
+      }
+   
+    .background{
+      background-image: url('/assets/Images/Car.jpg');
+      float:left;
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      margin-bottom: 50px;
+    }
+    
+    .bgc{
+      align-items: left;
+       width: 100%;
+      /* height: 100%; */
+      height: 580px;
+      z-index: 1;
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      /* text-align: center; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mat-fab{
+      padding: 50px;
+    }
+  
+    .insider{
+     /* align-content: right; */
+      display: flex;
+      flex-direction: column;
+      /* margin: 20px; */
+      
+    }
+    
+    a{
+      text-decoration: none;
+      color: white;
+    }
+    
+    .button1{
+     padding-left: 9px;
+      border:none;
+      border-radius: 10px;
+      padding: 10px;
+      /* background-color: rgba(255, 255, 255, 0.5);
+      color: black; */
+      background-color: rgb(113, 25, 195);
+      color: white;
+      align-self: auto;
+      width: 20%;
+      /* margin-bottom: 10px; */
+      margin-top: 10px;
+     
+    }
+    
+    .button1:hover{
+      background-color: rgba(0,0,0,0.5);
+      /* color: rgb(134, 119, 119) */
+      color:white
+    }
+    
+    .button1:hover a{
+      color: white
+    }
+
+  
+
+   
+    .some-class{
+  
+      width:23px;
+      float:left;
+     
+  }
+  .container1{
+      width:90px;
+     }
+     .container{
+      margin-bottom: 50px;
+     }
+
+     /* .carousel .item{
+      height:600px;
+     } */
+
+     /* .image{
+      height: 580px;
+     } */
+     /* .geeks {
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+      margin: 0 auto;
+  } */
+    
+  .imgcontainer img {
+      /* width: 100%; */
+      transition: 0.5s all ease-in-out;
+  }
+    
+  .imgcontainer:hover img {
+    transform: scale(1.1);
+  }
+     .imgcontainer{
+      float:left
+     }
+     .packcontainer{
+      float:left
+     }
+
+     .image{
+      width: 100px;
+      height:100px ;
+      border-radius: 50%;
+   
+      /* size: ; */
+     }
+
+     .card{
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    /* padding: 14px 80px 18px 36px; */
+    cursor: pointer;
+  }
+  
+  .card:hover{
+       transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+
+  .childcontainer1{
+    float:left;
+    width:65%;
+   
+  }
+  .childcontainer{
+    float:left;
+   
+    width:35%;
+   
+    
+  }
+  .childcontainer{
+    /* justify-content: center;
+    align-items: center; */
+    /* display: inline-block; */
+    padding-left: 10px;
+  }
+
+  /* .heading{
+    color: blueviolet;
+    font-size: 20px;
+    text-align: center;font-weight:bold;text-shadow:  2px 2px rgb(232, 219, 244);
+  } */
+  h1{
+    font-family:'sans-serif' ;
+      color: blueviolet;
+        font-size:30px;
+        font-weight:bold;text-shadow:  2px 2px rgb(232, 219, 244);/*, ,, , ,'Lucida Grande''Geneva''Verdana' */
+        text-align: center;
+  }
+

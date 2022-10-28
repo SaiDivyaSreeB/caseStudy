@@ -1,0 +1,44 @@
+<div *ngIf="role=='WASHER';else elseblock">
+  <h2> Logout and login as user.</h2>
+</div>
+<!-- <div class="container"style="padding:90px"> -->
+    <!--<div class="row"> -->
+<ng-template #elseblock>
+      <h1>Washpacks</h1>
+      <!-- <div *ngFor=" let rating of ratings let i= index"> -->
+        <div *ngFor="let washpack of Washpacks let i=index">
+        <br>
+        <div class="card mx-auto"style="width:66rem;">
+          <div class="card-body mx-auto">
+            <div class="col"class="imgcontainer">
+              <img src="{{washpack.image}}" alt="Close" style="height:200px;width:300px">
+            </div>
+            <div class="packcontainer"style="width:720px;padding-left:35px;">
+            <h2 class="card-title">{{washpack.name}}</h2>
+            <p class="card-text">Cost: {{washpack.cost}}</p>
+            <!-- <a href="#" class="btn btn-primary">{{rating.ratings}}</a> -->
+            <!-- <p>
+              Description:
+              <app-see-more-less [text]="washpack.description" [wordLimit]="15"></app-see-more-less>
+            </p> -->
+            <p class="card-text">Description: {{washpack.description}}</p>
+<!--            
+            <span *ngIf="washpack.description.length <= 15">{{washpack.description}}</span>
+            <span *ngIf="washpack.description.length > 15 && !washpack.showMore">
+              {{washpack.description.substring(0,wordLimit)}}....
+              <span (click)="showmoreles(washerpack.id)" class="font-weight-bold text-primary hand">show more</span>
+            </span>
+            <span *ngIf="washpack.description.length > 15 && washpack.showMore">
+              {{washpack.description}}
+              <span (click)="showmoreless(washerpack.id)" class="font-weight-bold text-primary hand">show less</span>
+            </span> -->
+            <!-- <p class="card-text">{{washpack.description}} </p> -->
+            <!-- <button   routerLink="/customer/placeOrder">Place order</button> -->
+            <button (click)="placeOrder(washpack.id)">Place order</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+   <!-- </div> -->
+<!-- </div> -->

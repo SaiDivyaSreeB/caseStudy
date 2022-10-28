@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="parent">
+     <div class="child"style="overflow:auto;justify-content: center;">
+     <div class="insidechild"style="align-items:center;overflow:auto;">
+        <h1 >Login to continue</h1>
+      <div class="imgcontainer">
+        <img src="\assets\Images\loginImage.webp" alt="login image"style="height:400px;width:450px">
+      </div>
+      <div class="wrapper">
+        <div class="title"><span>Login Form</span></div>
+        <form [formGroup]="LoginForm">
+          <div class="row">
+            <i class="fas fa-user"></i>
+           <input type="email" placeholder="Email" formControlName="username" [(ngModel)]="username">
+           <small [class.d-none]="LoginForm.controls['username'].valid||LoginForm.controls['username'].untouched" class="text-danger">
+            provide valid email address
+          </small>
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+           <input type="password" placeholder="Password" formControlName="Password" [(ngModel)]="Password">
+            <small [class.d-none]="LoginForm.controls['Password'].valid||LoginForm.controls['Password'].untouched" class="text-danger">
+              provide valid password
+            </small>
+          </div>
+          <div class="row button">
+            <button type="submit" value="Login" [disabled]="LoginForm.invalid"(click)="login()">login</button>
+          </div>
+          <div class="signup-link">Not a member? <a routerLink="/customer/register">Signup now</a></div>
+        </form>
+      </div>
+    </div>
+    </div>
+</div>
+  </body>
+</html>
+

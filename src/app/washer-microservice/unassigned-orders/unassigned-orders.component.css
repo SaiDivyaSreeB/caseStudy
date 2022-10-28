@@ -1,0 +1,19 @@
+.card{
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 2px solid rgba(0, 0, 0, 0.288);
+  }
+  h1{
+    font-family:'sans-serif' ;
+      color: blueviolet;
+        font-size:30px;
+        font-weight:bold;text-shadow:  2px 2px rgb(232, 219, 244);/*, ,, , ,'Lucida Grande''Geneva''Verdana' */
+        margin-bottom:5px;text-align: center;margin-top:10px;
+     }
+
+     .cartempty{
+      display: block;
+      margin-left:auto;
+      margin-right:auto;
+      /* width:50% */
+    }
