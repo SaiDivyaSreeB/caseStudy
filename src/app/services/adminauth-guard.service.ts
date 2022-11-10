@@ -7,12 +7,12 @@ import { AdminauthService } from './adminauth.service';
 export class AdminauthGuardService implements CanActivate{
 
   constructor(private adminAuth: AdminauthService, private router:Router) { }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
+  canActivate(): boolean  {
     if(this.adminAuth.isLoggedIn()){
       return true;
     }
     else{
-      this.router.navigate(['/admin/login']);
+      this.router.navigate(['/adminLogin']);
       return false;
     }
   }

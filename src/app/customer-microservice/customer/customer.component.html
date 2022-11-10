@@ -15,34 +15,43 @@
                 <li><a routerLink="/customer/pendingOrders">My Orders</a></li>
                 <li><a routerLink="/customer/viewRatings">View Ratings</a></li>
                 <li><a routerLink="/customer/viewWashpacks">Services</a></li>
-               
-            </ul> 
+           </ul> 
           
         </div>
         <div class="main_content">
             <div class="header">Welcome {{customerName}}!! Have a nice day.
-           
-              <span>
+            <span>
                 <div class="dropdown my-menu" >
                   <div class="alignment">
                   <a class="btn btn-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Profile
                   </a>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink" style="padding:10px" >
+                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink" style="padding:10px" >
+                    <li style="text-align:center"> 
+                      <div class="overlap">
+                        <label class="overlap_item">
+                      <img [src]="user.image" id="image" style="width:80px;height:80px;"> 
+                    </label>
+                  <label for="file-input"class="overlap_item"style="padding-left: 72px;">
+                      <img src="/assets/Images/edit.jpeg" style="border-radius: 100%;width:27px;height:27px;"> 
+                    </label>
+                      <input class="overlap_item" id="file-input"type="file"(change)="onselectFile($event,'updateForm')"style="display:none">
+                  </div>
+                   </li>
+                   <li style="text-align:center;"><img src="/assets/Images/delete.jpg" style="border-radius:100%;width:27px;height:27px;text-align: center;"(click)="deletePic()"></li>
                         <li style="text-align: center;">{{customerName}}</li>
                         <li style="text-align: center;">{{customerEmail}}</li>
-                          <li><a class="dropdown-item"  aria-labelledby="dropdownMenuLink">Edit Profile :</a></li>
+                          <li><a class="dropdown-item"  aria-labelledby="dropdownMenuLink">Edit nmae :</a></li>
                           <form [formGroup]="editProfileForm">
                             <div class="row">
-                              <i class="fas fa-user"></i>
                              <input type="text" placeholder="Fullname" formControlName="Fullname" [(ngModel)]="user.fullname"style="padding-top:5px">
                             </div>
                             <div class="row button" style="padding-top:5px;padding-bottom:5px">
-                              <button type="submit" value="Login" [disabled]="editProfileForm.invalid"(click)="editProfile()">Update</button>
+                              <button type="submit" value="Login" [disabled]="editProfileForm.invalid"(click)="editProfile()">Update profile</button>
                             </div>
                           </form>
                          <!-- <li><a class="dropdown-item" (click)="logout()" routerLink="/customer/login">Logout</a></li> -->
-                        <li><a class="dropdown-item" (click)="logout()" routerLink="/home">Logout</a></li>
+                        <li style="text-align:center;"><a class="dropdown-item" (click)="logout()" routerLink="/home" style="color:blue;">Logout</a></li>
                       </ul>
                  </div>
                 </div>

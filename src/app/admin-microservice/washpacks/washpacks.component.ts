@@ -61,20 +61,22 @@ export class WashpacksComponent implements OnInit {
 error:any;
   deleteWashpack(id:String,i:number){//,i:number
 
-     /* let res =*/ this.admin.deleteWashpack(id).pipe(catchError((err:HttpErrorResponse)=>{
+     /* let res =*/ this.admin.deleteWashpack(id)
+    //  .pipe(catchError((err:HttpErrorResponse)=>{
     
       
-        Swal.fire({
+    //     Swal.fire({
           
-          icon: 'error',
-        title: 'Oops...',
-        text: 'Server Error',
-        footer: '<a href="">Try Again</a>'
-        })
-        this.error="server error";
-       return "server error";
-    }))
-    .subscribe((msg:any)=>{
+    //       icon: 'error',
+    //     title: 'Oops...',
+    //     text: 'Server Error',
+    //     footer: '<a href="">Try Again</a>'
+    //     })
+    //     this.error="server error";
+    //    return "server error";
+    // }))
+    .subscribe({
+      next:(msg:any)=>{
       console.log(msg);
       console.log(msg.deleted);
       this.msg=msg;
@@ -91,26 +93,31 @@ error:any;
           })
       }
       
-    }
-    )
-
-   
-  }
-  update(id:string){
-    this.admin.editWashpack(id,this.Washpack).pipe(catchError((err:HttpErrorResponse)=>{
-    
-      
+    },
+    error:()=>{
       Swal.fire({
-        position : 'top-end',
-        icon: 'error',
+      icon: 'error',
       title: 'Oops...',
-      text: 'washpack not found or server error',
+      text: 'Server Error',
       footer: '<a href="">Try Again</a>'
       })
-     return "server error";
-     
-     
-  })).subscribe((washpack)=>{
+    }
+  })
+}
+  update(id:string){
+    this.admin.editWashpack(id,this.Washpack)
+    //.pipe(catchError((err:HttpErrorResponse)=>{
+    // Swal.fire({
+    //     position : 'top-end',
+    //     icon: 'error',
+    //   title: 'Oops...',
+    //   text: 'washpack not found or server error',
+    //   footer: '<a href="">Try Again</a>'
+    //   })
+    //  return "server error";
+    //  }))
+  .subscribe({
+    next:(washpack)=>{
       console.log(washpack);
       Swal.fire({
         position : 'top-end',
@@ -119,13 +126,20 @@ error:any;
         showConfirmButton:false,
         timer: 1000,
         })
+    },
+  error:()=>{
+    Swal.fire({
+      position : 'top-end',
+      icon: 'error',
+    title: 'Oops...',
+    text: 'washpack not found or server error,try again',
+  
     })
-   
+  }})
   }
   edit(washpack:any){
-    
     this.Washpack=washpack;
-    // console.log(this.Washpack);
+    console.log(this.Washpack.cost);
       let a = document.querySelector('.popup') as HTMLElement
       a.style.display='flex';
    }
@@ -136,31 +150,44 @@ error:any;
    errorOcuured:any;
    add(){
     console.log(this.pack);
-    this.admin.addWashpack(this.pack).pipe(catchError((err:HttpErrorResponse)=>{
-      this.errorOcuured=err;
-      Swal.fire({
-        position : 'top-end',
-        icon: 'error',
-      title: 'Oops...',
-      text: 'Fill all details correctly',
-      footer: '<a href="">Try Again</a>'
-      })
-     return "server error";
-  })).subscribe((response)=>{
+    this.admin.addWashpack(this.pack)
+  //   .pipe(catchError((err:HttpErrorResponse)=>{
+  //     this.errorOcuured=err;
+  //     Swal.fire({
+  //       position : 'top-end',
+  //       icon: 'error',
+  //     title: 'Oops...',
+  //     text: 'Fill all details correctly',
+  //     footer: '<a href="">Try Again</a>'
+  //     })
+  //    return "server error";
+  // }))
+  .subscribe({
+    next:(response)=>{
     if(!this.errorOcuured){
       console.log(response);
       this.washpack=response;
+      console.log(this.washpack.cost);
       Swal.fire({
         position : 'top-end',
           icon:'success',
           title:'Added',
         showConfirmButton:false,
-        timer: 1000,
+        timer: 2000,
         })
       }
     },
+    error:()=>{
+      Swal.fire({
+              position : 'top-end',
+              icon: 'error',
+            title: 'Oops...',
+            text: 'Fill all details correctly',
+            footer: '<a href="">Try Again</a>'
+            })
+    }
  // error:(err)=>{console.log(err.message)}})//this.errorMessage=err.message;console.log("hi");console.log(this.errorMessage);console.log("hello")
-)  
+  })  
    }
           
   delete(id:String,i:number){

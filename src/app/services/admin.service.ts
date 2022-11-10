@@ -21,12 +21,6 @@ export class AdminService {
   }
   getWashPacks(){
     return this.http.get(`http://localhost:8093/admins/findallWp`
-    // ,
-    // {
-    //    headers:{
-    //      authorization:String(this.adminAuth.getToken())
-    //    }
-    // }
     );
   }
   editWashpack(washpackId:String,washpack:any){
@@ -41,4 +35,5 @@ export class AdminService {
   updateProfile(id:string,admin:any){
     return this.http.put(`http://localhost:8093/manage/updateprofile/${id}`,admin,{responseType:'Text' as 'json'});
   }
+ 
 }

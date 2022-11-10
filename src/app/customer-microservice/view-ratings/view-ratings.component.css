@@ -1,39 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
- /* .col-sm-4{
-margin-left: 5px;
-
-}  */
-/* *{
-
-    box-sizing: border-box;
-}
-.column{
-    float:left;
-    width:3.33%;
-    padding:5px;
-}
-.row::after{
-    content:"";
-    display:table;
-    clear:both
-} */
-
-
-/* *{
-
-    box-sizing: border-box;
-}
-.column{
-    float:left;
-    width:3.33%;
-    padding:5px;
-}
-.row::after{
-    content:"";
-    display:table;
-    clear:both
-} */
-
+ 
 
 .some-class{
   
@@ -43,40 +9,8 @@ margin-left: 5px;
 }
 .container{
     width:90px;
-   
+   }
 
-}
-
-
-/* .col-sm-6{
-   width:300px;
-    float:left
-} */
- 
- /* .row{
-    width:290px;
-    float:left
-}   */
-
-/* .card{
-     float:left;
-    width:20px 
-    display: inline-block;
-}     */
- /* .container1{
-    width:1000px
-}   */
- /*.some-class1{
-    width:300px
-} */
-
-/* col-sm-6{
-
-}
-
-row{
-
-} */
 
 .card{
     border-radius: 4px;

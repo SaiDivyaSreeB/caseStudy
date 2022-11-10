@@ -47,13 +47,14 @@
         <div class="row button">
           <button type="submit" value="Login" [disabled]="LoginForm.invalid"(click)="login()">login</button>
         </div>
-        <div class="signup-link">Not a member? <a routerLink="/washer/register">Signup now</a></div>
+        <div class="signup-link">Not a member? <a routerLink="/washerRegister">Signup now</a></div>
       </form>
     </div>
   </div>
 <!-- </div> -->
   </div>
 </div>
+<router-outlet></router-outlet>
 </body>
 </html>
 

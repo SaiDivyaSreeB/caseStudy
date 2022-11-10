@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { AdminauthService } from 'src/app/services/adminauth.service';
 import Swal from 'sweetalert2';
-import {adminDetails} from './adminInfo'
+import {admin, adminDetails} from './adminInfo'
 @Component({
   selector: 'app-admin-registation',
   templateUrl: './admin-registation.component.html',
@@ -20,6 +20,18 @@ export class AdminRegistationComponent implements OnInit {
     password:"",
     fullname:"",
      }
+     //interface User{}
+    //  user={
+    // id:"",
+    // email:"",
+    // password:"",
+    // token:"",
+    // fullname:"",
+    // enabled:false,
+    // roles:[{id:"",role:"ADMIN"}]
+    //  }
+    user:any;
+  registeredUser:any;
   message:any;
   status:any;
   RegistrationForm = new FormGroup({
@@ -29,19 +41,27 @@ export class AdminRegistationComponent implements OnInit {
   })
   public registerNow(){
       let res = this.admin.register(this.adminDetails)
-      .pipe(catchError((err:HttpErrorResponse)=>{
-        console.log("firsterr");
-        Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Server Error, try again',
-     })
-       this.router.navigate(['/admin/register']);
-        return throwError("server Error")
-      }
-      ))
-      .subscribe((data:any)=>{
+    //   .pipe(catchError((err:HttpErrorResponse)=>{
+    //     console.log("firsterr");
+    //     Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: 'Server Error, try again',
+    //  })
+    //    this.router.navigate(['/admin/register']);
+    //     //return throwError("server Error")
+    //     return "server Error"
+    //   }
+    //   ))
+      .subscribe(
+        {next:(data:any)=>{
         this.message=data;
+        this.user=data;
+        console.log(".............")
+        console.log(this.user);
+        console.log(this.user.enabled);
+        console.log(this.user.email);
+        console.log("................");
        console.log(this.message);
        console.log(data);
        if(data=="User exists already, try with a different email address"){
@@ -54,18 +74,47 @@ export class AdminRegistationComponent implements OnInit {
        })
        this.router.navigate(['/admin/register']);
        }
-     else{
+    else{
      Swal.fire({
        position : 'top-end',
          icon:'success',
-         title:'Saved. Login to continue',
+         title:'Saved',
        showConfirmButton:false,
-       timer: 1000
+       timer: 2000
        })
-       this.router.navigate(['/admin/login']);
+       this.router.navigate(['/admin/register']);
+     
        console.log(this.message);
+       console.log(this.user);
+       console.log(this.user.enabled)
        }
-   })
+  //     if(this.message.enabled==true){
+  //    Swal.fire({
+  //      position : 'top-end',
+  //        icon:'success',
+  //        title:'Saved. Login to continue',
+  //      showConfirmButton:false,
+  //      timer: 1000
+  //      })
+  //      this.router.navigate(['/admin/login']);
+  //      console.log(this.message);
+  //      }
+  },
+  error:(err:HttpErrorResponse)=>{
+     //   .pipe(catchError((err:HttpErrorResponse)=>{
+    //     console.log("firsterr");
+        Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Server Error, try again',
+     })
+       this.router.navigate(['/admin/register']);
+    //     //return throwError("server Error")
+    //     return "server Error"
+    //   }
+    //   ))
+  }
+})
    }
    role:any;
  ngOnInit(): void {

@@ -15,17 +15,17 @@ export class CustomerauthService {
   authenticate(mail:string,password:string){
     console.log("hi");
     return this.http.post("http://localhost:8093/authUser/login",{email:mail,password:password})
-    .pipe((catchError((err:HttpErrorResponse)=>{Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Wrong Credentials!',
-      footer: '<a href="">Try Again</a>'
-    })
-    this.router.navigate(['customer/login']);
-    return throwError(()=>err)})))
+    // .pipe((catchError((err:HttpErrorResponse)=>{
+    //   Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: 'Wrong Credentials or server error, try again',
+    // })
+    // this.router.navigate(['/customerLogin']);
+    // return throwError(()=>err)})))
   
     .subscribe(
-        (userData:any)=>{
+       {next: (userData:any)=>{
         this.customer=userData;
         sessionStorage.setItem('email',mail);
         let token = "Bearer "+userData.token;
@@ -34,7 +34,17 @@ export class CustomerauthService {
         sessionStorage.setItem('fullname',userData.fullname);
         sessionStorage.setItem('roles',userData.roles);
         sessionStorage.setItem('role',userData.roles[0].role);
+        sessionStorage.setItem('picture',userData.image);
         this.router.navigate(['/customer/viewWashpacks']);
+       },
+       error:()=>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Wrong Credentials or server error, try again',
+        })
+        this.router.navigate(['/customerLogin']);
+       }
 })}
 register(user:any){
   return this.http.post("http://localhost:8093/authUser/register",user,{responseType:'text' as 'json'});
@@ -56,7 +66,8 @@ logout(){
          sessionStorage.removeItem("email");
          sessionStorage.removeItem('id');
          sessionStorage.removeItem('fullname');
-           sessionStorage.removeItem('roles');
+         sessionStorage.removeItem('roles');
+         sessionStorage.removeItem('picture');
 }
 getCustomerEmail(){
   return sessionStorage.getItem("email");
@@ -78,6 +89,14 @@ updateName(name:string){
 }
 getRole(){
   return sessionStorage.getItem('role');
+ }
+ updateProfile(name:string,picture:any){
+  // return sessionStorage.setItem('fullname',name);
+  sessionStorage.setItem('fullname',name);
+  sessionStorage.setItem('picture',picture);
+}
+getProfilePic(){
+  return sessionStorage.getItem('picture');
  }
 }
 

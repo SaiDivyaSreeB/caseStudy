@@ -15,16 +15,18 @@ export class AdminauthService {
   authenticate(mail:string,password:string){
     console.log("hi");
     return this.http.post("http://localhost:8093/authAdmin/login",{email:mail,password:password})
-    .pipe((catchError((err:HttpErrorResponse)=>{Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Wrong Credentials! or server error',
-      footer: '<a href="">Try Again</a>'
-    })
-    this.router.navigate(['admin/login']);
-    return throwError(()=>err)})))
+    // .pipe((catchError((err:HttpErrorResponse)=>
+    // {
+    //   Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: 'Wrong Credentials! or server error, Try Again',
+    // })
+    // this.router.navigate(['/adminLogin']);
+    // return throwError(()=>err)})))
   
-    .subscribe((userData:any)=>{
+    .subscribe({
+      next:(userData:any)=>{
         console.log(userData);
         sessionStorage.setItem('email',mail);
         let token = "Bearer "+userData.token;
@@ -32,11 +34,20 @@ export class AdminauthService {
         sessionStorage.setItem('id',userData.id);
         sessionStorage.setItem('fullname',userData.fullname);
         sessionStorage.setItem('roles',userData.roles);
+        sessionStorage.setItem('picture',userData.image);
         sessionStorage.setItem('role',userData.roles[0].role);
         sessionStorage.setItem('user',userData);
         this.router.navigate(['/admin/washpacks'])
+      },
+    error:()=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Wrong Credentials! or server error, Try Again',
       })
-    }
+      this.router.navigate(['/adminLogin']);
+    }})
+  }
   register(user:any){
     return this.http.post("http://localhost:8093/authAdmin/register",user,{responseType:'text' as 'json'});
   }
@@ -57,14 +68,17 @@ export class AdminauthService {
            sessionStorage.removeItem("email");
            sessionStorage.removeItem('id');
            sessionStorage.removeItem('fullname');
-             sessionStorage.removeItem('roles');
+           sessionStorage.removeItem('roles');
+           sessionStorage.removeItem('picture');
   }
  getAdminName(){
   return sessionStorage.getItem('fullname');
  }
 
- updateName(name:string){
-  return sessionStorage.setItem('fullname',name);
+ updateProfile(name:string,picture:any){
+  // return sessionStorage.setItem('fullname',name);
+  sessionStorage.setItem('fullname',name);
+  sessionStorage.setItem('picture',picture);
 }
 getId(){
   return sessionStorage.getItem('id');
@@ -77,5 +91,8 @@ getId(){
  }
  getRole(){
   return sessionStorage.getItem('role');
+ }
+ getProfilePic(){
+  return sessionStorage.getItem('picture');
  }
 }

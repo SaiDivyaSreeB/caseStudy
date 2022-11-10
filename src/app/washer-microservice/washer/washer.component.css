@@ -111,4 +111,21 @@
   text-align:"center"
 }
 
-
+.overlap{
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:1fr;  
+ 
+ }
+ .overlap_item:first-of-type{ 
+   grid-column:1/span1;
+  grid-row:1/span2;
+ }
+ .overlap_item:last-of-type{
+  grid-column:1/span2;
+  grid-row:2/span1;
+ }
+ #image{
+  border-radius: 50%;
+ }
+ 

@@ -21,9 +21,8 @@ export class WasherRegistrationComponent implements OnInit {
   washerDetails:washerDetails={
     email:"",
     password:"",
-    
     fullname:"",
-     }
+    }
   message:any;
   status:any;
   RegistrationForm = new FormGroup({
@@ -32,22 +31,9 @@ export class WasherRegistrationComponent implements OnInit {
     fullname:new FormControl('',Validators.required)
   })
  registerNow(){
-    
       let res = this.washer.register(this.washerDetails)
-      .pipe(catchError((err:HttpErrorResponse)=>{
-        console.log("oops");
-        Swal.fire({
-        
-        icon: 'error',
-      title: 'Oops...',
-      text: 'Server Error',
-      footer: '<a href="">Try Again</a>'
-      })
-      this.router.navigate(['/washer/register']);
-      return throwError("server Error")
-    }
-      ))
-      .subscribe((data:any)=>{
+      .subscribe({
+        next:(data:any)=>{
        this.message=data;
       console.log(this.message);
       console.log(data);
@@ -56,10 +42,9 @@ export class WasherRegistrationComponent implements OnInit {
         Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'User already exists!, Try with different mail',
-      footer: '<a href="">Try Again</a>'
+      text: 'User already exists!, Try with different mail, Try Again',
       })
-      this.router.navigate(['/washer/register']);
+      this.router.navigate(['/washerRegister']);
       }
     else{
     Swal.fire({
@@ -67,13 +52,21 @@ export class WasherRegistrationComponent implements OnInit {
         icon:'success',
         title:'Saved. Login to continue',
       showConfirmButton:false,
-      timer: 1000
+      timer: 2000
       })
       console.log("login");
-      this.router.navigate(['/washer/login']);
+      this.router.navigate(['/washerLogin']);
       console.log(this.message);
     }
+  },
+error:()=>{
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Server Error, try again',
   })
+  this.router.navigate(['/washerRegister']);
+}})
   }
   ngOnInit(): void {
   }

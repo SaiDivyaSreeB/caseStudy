@@ -14,9 +14,9 @@ const routes: Routes = [
   children:
   [
   //{path:'dashboard',component:CustomerDashboardComponent},
-   {path:'login',component:CustomerLoginComponent},
+   //{path:'login',component:CustomerLoginComponent},
   
-  {path:'register',component:CustomerRegistrationComponent},
+  // /{path:'register',component:CustomerRegistrationComponent},
   {path:'placeOrder',component:PlaceOrderComponent,canActivate:[CustomerauthGuardService]},
   {path:'pendingOrders',component:PendingOrdersComponent,canActivate:[CustomerauthGuardService]},
   {path:'viewRatings',component:ViewRatingsComponent,canActivate:[CustomerauthGuardService]},

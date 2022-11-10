@@ -61,12 +61,9 @@ export class PlaceOrderComponent implements OnInit {
     anyaddon:new FormControl('',Validators.nullValidator)
     
   })
-  // get f(){
-  //   return this.orderForm.controls;
-  // }
+
   role:any;
   constructor(private http :HttpClient,private customer:CustomerService,private customerAuth:CustomerauthService, private route:ActivatedRoute) {
-    //this.washpack="";
    this.role=this.customerAuth.getRole();
     this.mail=this.customerAuth.getCustomerEmail();
    this.order.userEmailId=this.mail;
@@ -75,29 +72,16 @@ export class PlaceOrderComponent implements OnInit {
     this.customer.getWashpackById(this.washpackId).subscribe((waspack)=>{
       this.pack=waspack;
       console.log(this.pack);
-      console.log("------------------");
       console.log(this.pack.name);
         this.washpack=this.pack.name;
         console.log(this.washpack);
-    });
-    
-   }
+    });}
 
   ngOnInit(): void {
     this.customer.getPacks().subscribe((packs)=>{
       this.packs=packs;
-    }
-    )
-
+    })
   }
-//   confirm(){
-//    // console.log(this.washpack.cost);
-//     this.order.washpack=this.washpack;
-//     console.log(this.order.washpack);
-//     console.log(this.washpack);
-//     console.log(this.order);
-    
-// }
     paymentId: string="";
     error:string="";
 
@@ -139,49 +123,28 @@ confirm():void{
     console.log(this.washpack);
     console.log(this.order);
     this.form.name=String(this.customerAuth.getCustomerName());
-    //order:email;phoneno
-
     this.customer.getWashpackCost(this.washpack).subscribe((cost)=>{
-      console.log("----------------inside get cost------------------");
-      console.log(cost);
       this.washpackCost=cost;
       this.form.cost=this.washpackCost;
-      console.log(this.form.cost);
       this.form.mail=String(this.order.userEmailId);
       this.form.phone=this.order.phoneNo;
-      console.log(this.form);
       this.customer.addOrder(this.form).subscribe(data=>{
-        console.log(data);
         this.data=data;
-        console.log(this.data);
-        console.log(this.data.secretId);
         this.options.key=this.data.secretId;
-        console.log(this.options.key);
         this.options.order_id=this.data.razorpayOrderId;
-        console.log(this.options.order_id);
         this.options.amount=this.data.applicationFee;
-        console.log(this.options.amount);
         this.options.prefill.name=this.form.name;
-        console.log(this.options.prefill.name);
         this.options.prefill.email=this.form.mail;
-        console.log(this.options.prefill.email);
         this.options.prefill.contact=String(this.form.phone);
         this.options.image="";
         var rz =new Razorpay(this.options);
         rz.open();
-      
-
       });
     });
-      
-   
+  }
 
-}
-
-         
   done(){
-    
-      Swal.fire({
+    Swal.fire({
         title: 'Place Order?',
         text: "Your order will be confirmed",
         icon: 'success',
@@ -194,8 +157,7 @@ confirm():void{
           this.confirm();
         }
       })
-    
-  }
+    }
 
   @HostListener('window:payment.success', ['$event']) 
   onPaymentSuccess(event:any): void {
@@ -204,17 +166,7 @@ confirm():void{
       console.log(order);
       Swal.fire({
         title: 'payment successful',
-        // text: "Your order will be confirmed",
         icon: 'success',
-        // showCancelButton: true,
-        // confirmButtonColor: '#3085d6',
-        // cancelButtonColor: '#d33',
-        // confirmButtonText: 'Done!'
       })
-     });
-     
-  }
- 
-
-
-}
+     });}
+ }

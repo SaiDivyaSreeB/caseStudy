@@ -6,14 +6,16 @@ import { WasherOrdersComponent } from './washer-orders/washer-orders.component';
 import { WasherRegistrationComponent } from './washer-registration/washer-registration.component';
 import { WasherComponent } from './washer/washer.component';
 import { WasherauthGuardService } from '../services/washerauth-guard.service';
+import { RatingsComponent } from './ratings/ratings.component';
 const routes:Routes=[
   {
     path:'washer',component:WasherComponent,
     children:[
-      {path:'login',component:WasherLoginComponent},
-      {path:'register', component:WasherRegistrationComponent},
+      //{path:'login',component:WasherLoginComponent},
+      //{path:'register', component:WasherRegistrationComponent},
       {path:'myOrders',component:WasherOrdersComponent,canActivate:[WasherauthGuardService]},
-      {path:'unassignedOrders',  component:UnassignedOrdersComponent,canActivate:[WasherauthGuardService]}
+      {path:'unassignedOrders',  component:UnassignedOrdersComponent,canActivate:[WasherauthGuardService]},
+      {path:'ratings',component:RatingsComponent,canActivate:[WasherauthGuardService]}
     ]
   }
 ];

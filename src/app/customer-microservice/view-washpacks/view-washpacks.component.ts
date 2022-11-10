@@ -22,14 +22,15 @@ washpack={
 wordLimit:number=15;
  role:any;
   constructor(private customer:CustomerService, private router:Router,private customerAuth:CustomerauthService) { 
-this.role=this.customerAuth.getRole();
+
+  }
+
+  ngOnInit(): void {
+    this.role=this.customerAuth.getRole();
     this.customer.getPacks().subscribe((washpacks)=>{
       this.Washpacks=washpacks;
       console.log(this.Washpacks);
     })
-  }
-
-  ngOnInit(): void {
   }
  placeOrder(washpackId:String){
   this.router.navigate(['customer/placeOrder',washpackId]);

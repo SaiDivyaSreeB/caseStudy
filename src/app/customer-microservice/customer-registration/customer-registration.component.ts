@@ -15,7 +15,6 @@ export class CustomerRegistrationComponent implements OnInit {
   customerDetails:customerDetails={
     email:"",
     password:"",
-    
     fullname:"",
      }
   message:any;
@@ -31,47 +30,43 @@ export class CustomerRegistrationComponent implements OnInit {
   }
   registerNow(){
     let res = this.customerAuth.register(this.customerDetails)
-    .pipe(catchError((err:HttpErrorResponse)=>{
-      console.log("firsterr");
-      Swal.fire({
-      
-      icon: 'error',
-    title: 'Oops...',
-    text: 'Server Error',
-    footer: '<a href="">Try Again</a>'
-    })
-     this.router.navigate(['/customer/register']);
-      return throwError("server Error")
-    }
-    ))
-    .subscribe((data:any)=>{
+    .subscribe({
+      next:(data:any)=>{
       this.message=data;
      console.log(this.message);
      console.log(data);
      if(data=="oops"){
        console.log("oops");
        Swal.fire({
-       
-       icon: 'error',
+      icon: 'error',
      title: 'Oops...',
      text: 'User already exists!, Try with different mail',
-     footer: '<a href="">Try Again</a>'
+   
      })
-     this.router.navigate(['/customer/register']);
-     
-   }
+     this.router.navigate(['/customerRegister']);
+     }
    else{
    Swal.fire({
      position : 'top-end',
        icon:'success',
        title:'Saved. Login to continue',
      showConfirmButton:false,
-     timer: 1000
+     timer: 2000
      })
-     this.router.navigate(['/customer/login']);
+     this.router.navigate(['/customerLogin']);
      console.log(this.message);
    
    }
+ },
+ error:()=>{
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Server Error, try again',
+   })
+     this.router.navigate(['/customerRegister']);
+ }
+ 
  })
 
 }

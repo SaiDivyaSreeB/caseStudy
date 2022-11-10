@@ -20,6 +20,7 @@
             <!-- <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
             <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
             <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li> -->
+            <li><a routerLink="/washer/ratings">View Ratings</a>
         </ul> 
         <!-- <div class="social_media">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -34,15 +35,30 @@
               <div style="text-align: right;" ><a class="my-menu" (click)="logout()" routerLink="/home">Logout</a></div>
             </span> -->
             <span>
-              <div class="dropdown my-menu" >
+              <div class="dropdown my-menu" style="padding:10px"  >
                 <div class="alignment">
                 <a class="btn btn-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                   Profile
                 </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink" >
-                    <li>{{washerName}}</li>
-                    <li>{{washerEmail}}</li>
-                   <li><a class="dropdown-item" (click)="logout()" routerLink="/home">Logout</a></li>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLink" style="padding:10px" >
+                  <li style="text-align:center"> 
+                    <div class="overlap">
+                      <label class="overlap_item">
+                    <img [src]="washerData.image" id="image" style="width:80px;height:80px"> 
+                  </label>
+                <label for="file-input"class="overlap_item"style="padding-left: 72px;">
+                    <img src="/assets/Images/edit.jpeg"  style="border-radius: 100%;width:27px;height:27px;"> 
+                  </label>
+                    <input class="overlap_item" id="file-input"type="file"(change)="onselectFile($event,'updateForm')"style="display:none">
+                </div>
+                <div style="text-align:center;"><img src="/assets/Images/delete.jpg" style="border-radius:100%;width:27px;height:27px;text-align: center;"(click)="deletePic()"></div>
+                <div class="row button" style="padding-top:5px;padding-bottom:5px">
+                  <button type="submit" (click)="edit()">Update profile</button>
+                </div>
+                 </li>
+                    <li style="text-align:center">{{washerName}}</li>
+                    <li style="text-align:center">{{washerEmail}}</li>
+                   <li style="text-align:center"><a class="dropdown-item" (click)="logout()" routerLink="/home" style="color:blue">Logout</a></li>
                 </ul>
                </div>
               </div>

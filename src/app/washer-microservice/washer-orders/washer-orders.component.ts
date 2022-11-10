@@ -18,53 +18,12 @@ export class WasherOrdersComponent implements OnInit {
   washerName:any;
   role:any;
   constructor(private washer:WasherService,private washerAuth:WasherauthService) { 
-    this.role=this.washerAuth.getRole();
-    this.washerName=this.washerAuth.getWasherName();
-    this.washer.getPendingOrders(this.washerName).subscribe(orders=>{
-      console.log(orders);
-      this.orders=orders;
-      console.log(this.orders);
-      if(this.orders.length==0){
-           console.log(this.orders.length);
-        this.orderCount=this.orders.length;
-        this.flag=true;
-
-    }
-    else{
-      
-      this.orderCount=this.orders.length;
-      this.flag=false;
-      console.log(this.orderCount);
-    }
-    console.log(orders);
-      //this.array=orders;
-     // console.log(this.orders);
-    })
   }
-  
-  // hide(i:number){
-    
-  //   console.log(this.array);
-  //   this.orders.splice(i,1);
-
-  // }
   order:any;
   status(i:String,index:number){
-   
-    this.washer.updateStatus(i).pipe(catchError((err:HttpErrorResponse)=>{
-    
-      
-      Swal.fire({
-        position : 'top-end',
-        icon: 'error',
-      title: 'Oops...',
-      text: 'status not updated, try again',
-      footer: '<a href="">Try Again</a>'
-      })
-     return "server error";
-     
-     
-    })).subscribe(order=>{
+    this.washer.updateStatus(i)
+    .subscribe({
+      next:(order)=>{
       this.order=order;
       console.log(this.order);
     console.log(this.order.status);
@@ -73,22 +32,25 @@ export class WasherOrdersComponent implements OnInit {
         icon:'success',
         title:'Status updated successfully',
       showConfirmButton:false,
-      timer: 1000,
+      timer: 2000,
       })
       this.orders.splice(index,1);
       this.orderCount=this.orderCount-1;
       if(this.orderCount==0){
         this.flag=true;
       }
-      else{
-        
-      }
+      else{}
+    },
+  error:()=>{
+    Swal.fire({
+      position : 'top-end',
+      icon: 'error',
+    title: 'Oops...',
+    text: 'status not updated, try again',
     })
-    
-  }
-         
+  }})
+    }     
   reject(id:String,index:number){
-    
     Swal.fire({
       title: 'Reject Order?',
       text: "order will be rejected",
@@ -102,23 +64,11 @@ export class WasherOrdersComponent implements OnInit {
         this.done(id,index);
       }
     })
-  
 }
   done(id:String,index:number){
-this.washer.rejectOrder(id).pipe(catchError((err:HttpErrorResponse)=>{
-    
-      
-  Swal.fire({
-    position : 'top-end',
-    icon: 'error',
-  title: 'Oops...',
-  text: 'not able to reject, try again',
-  footer: '<a href="">Try Again</a>'
-  })
- return "server error";
- 
- 
-})).subscribe(order=>{
+this.washer.rejectOrder(id)
+.subscribe({
+  next:(order)=>{
   this.order=order;
   console.log(this.order);
   Swal.fire({
@@ -126,21 +76,44 @@ this.washer.rejectOrder(id).pipe(catchError((err:HttpErrorResponse)=>{
       icon:'success',
       title:'Rejected successfully',
     showConfirmButton:false,
-    timer: 1000,
+    timer: 2000,
     })
     this.orders.splice(index,1);
     this.orderCount=this.orderCount-1;
       if(this.orderCount==0){
         this.flag=true;
       }
-  
-})
-
-  }
+},
+error:()=>{
+    Swal.fire({
+    position : 'top-end',
+    icon: 'error',
+  title: 'Oops...',
+  text: 'not able to reject, try again',
+  })
+}})
+}
   ngOnInit(): void {
+    this.role=this.washerAuth.getRole();
+    this.washerName=this.washerAuth.getWasherName();
+    this.washer.getPendingOrders(this.washerName).subscribe(orders=>{
+      console.log(orders);
+      this.orders=orders;
+      console.log(this.orders);
+      if(this.orders.length==0){
+           console.log(this.orders.length);
+        this.orderCount=this.orders.length;
+        this.flag=true;
+      }
+    else{
+      this.orderCount=this.orders.length;
+      this.flag=false;
+      console.log(this.orderCount);
+    }
+    console.log(orders);
+    })
   }
   completed(i:String,index:number){
-    
     Swal.fire({
       title: 'Assign to order?',
       text: "Your order will be confirmed",
@@ -154,7 +127,5 @@ this.washer.rejectOrder(id).pipe(catchError((err:HttpErrorResponse)=>{
         this.status(i,index);
       }
     })
-  
   }
-
 }

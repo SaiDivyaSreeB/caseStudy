@@ -11,7 +11,7 @@ if(this.authService.isLoggedIn())
   console.log("---verifieddd---");
 return true;
 }
-this.router.navigate(['/washer/login'])
+this.router.navigate(['/washerLogin'])
 return false;
   }
   

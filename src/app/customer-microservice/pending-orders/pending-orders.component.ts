@@ -67,7 +67,7 @@ role:any;
   ngOnInit(): void {
     this.role=this.customerAuth.getRole();
     this.email=this.customerAuth.getCustomerEmail();
-    this.customer.getPendingOrders(this.email).subscribe((orders)=>{
+    this.customer.getOrders(this.email).subscribe((orders)=>{
       this.orders=orders;
       if(this.orders.length==0){
            this.orderCount=this.orders.length;
@@ -102,7 +102,7 @@ role:any;
         icon:'success',
         title:'deleted',
       showConfirmButton:false,
-      timer: 1000,
+      timer: 2000,
       })
     this.orders.splice(i,1);
     this.orderCount=this.orderCount-1;
@@ -111,9 +111,7 @@ role:any;
       this.flag=true;
     }
    }
-       
-   cancelOrder(order:Object){
-    
+    cancelOrder(order:Object){
     Swal.fire({
       title: 'Cancel Order?',
       text: "Your order will be cancelled",
@@ -128,63 +126,66 @@ role:any;
         this.done(order);
       }
     })
-  
 }
+
   done(order:Object){
-    this.customer.cancelOrder(order).pipe(catchError((err:HttpErrorResponse)=>{
-    
-      
-      Swal.fire({
-        position : 'top-end',
-        icon: 'error',
-      title: 'Oops...',
-      text: 'server error, Try again',
-      footer: '<a href="">Try Again</a>'
-      })
-     return "server error";
-     
-     
-  })).subscribe(
-      (message)=>{
+     this.customer.cancelOrder(order)
+     //.pipe(catchError((err:HttpErrorResponse)=>{
+    //   Swal.fire({
+    //   position : 'top-end',
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: 'server error, Try again',
+    //   footer: '<a href="">Try Again</a>'
+    //   })
+    //  return "server error";
+    //  }))
+     .subscribe({
+      next:(message)=>{
         console.log(message);
         Swal.fire({
           position : 'top-end',
-            icon:'success',
-            title:'Cancelled successfully',
+          icon:'success',
+          title:'Cancelled successfully',
           showConfirmButton:false,
-          timer: 1000,
-          })
-      }
-    )
-  }
-   updateOrder(OrderId:String,Order:Object){
-    this.customer.updateOrder(OrderId,Order).pipe(catchError((err:HttpErrorResponse)=>{
-    
-      
-      Swal.fire({
-        position : 'top-end',
-        icon: 'error',
-      title: 'Oops...',
-      text: 'not updated, try again',
-      footer: '<a href="">Try Again</a>'
+          timer: 2000,
       })
-     return "server error";
-     
-     
-  })).subscribe((updatedOrder)=>
-    console.log(updatedOrder))
-    console.log(this.Order.userEmailId);
-    console.log(this.Order.washerName);
+      },
+    error:(err:HttpErrorResponse)=>{
+        Swal.fire({
+      position : 'top-end',
+      icon: 'error',
+      title: 'Oops...',
+      text: 'server error, Try again',
+      
+      })
+    }})
+  }
+
+   updateOrder(OrderId:String,Order:Object){
+    this.customer.updateOrder(OrderId,Order)
+     .subscribe({
+      next:(updatedOrder)=>{
+    console.log(updatedOrder)
     Swal.fire({
       position : 'top-end',
         icon:'success',
         title:'Updated',
       showConfirmButton:false,
-      timer: 1000,
+      timer: 2000,
       })
-   }
+   },
+   error:()=>{
+    Swal.fire({
+        position : 'top-end',
+        icon: 'error',
+      title: 'Oops...',
+      text: 'not updated, try again',
+     
+      })
+  }}
+  )}
    edit(order:any){
-    
     this.Order=order;
       let a = document.querySelector('.popup') as HTMLElement
        a.style.display='flex';
@@ -244,29 +245,28 @@ role:any;
   }
   addRatingComment(){
     console.log(this.Rating);
-    this.customer.giveRatingComment(this.Rating).pipe(catchError((err:HttpErrorResponse)=>{
-    
-      
-      Swal.fire({
-        position : 'top-end',
-        icon: 'error',
-      title: 'Oops...',
-      text: 'Server Error, Try again',
-      footer: '<a href="">Try Again</a>'
-      })
-     return "server error";
-     
-     
-  })).subscribe((response)=>{
+    this.customer.giveRatingComment(this.Rating)
+     .subscribe({
+      next:(response)=>{
       console.log(response);
       Swal.fire({
         position : 'top-end',
           icon:'success',
           title:'Feedback Saved',
         showConfirmButton:false,
-        timer: 1000,
+        timer: 2000,
         })
-    });
+    },
+  error:()=>{
+    Swal.fire({
+          position : 'top-end',
+          icon: 'error',
+        title: 'Oops...',
+        text: 'Server Error, Try again',
+       
+        })
+  }
+});
   }
    }
 

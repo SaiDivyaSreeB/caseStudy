@@ -15,7 +15,7 @@ const routes: Routes = [
     path:'admin',component:AdminComponent,
     children:[
       
-      {path:'login',component:AdminLoginComponent},
+      //{path:'login',component:AdminLoginComponent},
       {path:'register',component:AdminRegistationComponent,canActivate:[AdminauthGuardService]},
       //{path:'dashboard',component:AdminDashboardComponent},
       {path:'unassigned',component:UnassignedOrdersComponent,canActivate:[AdminauthGuardService]},

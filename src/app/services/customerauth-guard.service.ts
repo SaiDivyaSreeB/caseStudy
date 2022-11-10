@@ -15,7 +15,7 @@ export class CustomerauthGuardService implements CanActivate{
       console.log("---verifieddd---");
     return true;
     }
-    this.router.navigate(['/customer/login'])
+    this.router.navigate(['/customerLogin'])
     return false;
       }
 }

@@ -30,4 +30,8 @@ export class WasherService {
     let url=`http://localhost:8093/washers/updateProfile/${id}`
     return this.http.put(url,user,{responseType:'text'as'json'})
   }
+  viewRatings(){
+    let url=`http://localhost:8093/users/getAllRatings`
+    return this.http.get(url);
+  }
 }

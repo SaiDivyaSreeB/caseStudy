@@ -30,15 +30,9 @@ export class HomeComponent implements OnInit {
     this.customer.viewRatings().subscribe((Ratings)=>{
         console.log(Ratings);
          this.ratings=Ratings})
-   
-   }
-
-  ngOnInit(): void {
-   
   }
+ngOnInit(): void {}
   counter(i:number){
     return new Array(i);
    }
- 
-
-}
+ }

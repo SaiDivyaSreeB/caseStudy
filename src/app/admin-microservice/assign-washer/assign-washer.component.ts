@@ -37,7 +37,7 @@ export class AssignWasherComponent implements OnInit {
           return res.fullname.toLocaleLowerCase().match(this.fullname.toLocaleLowerCase());
         })
       }
-       }
+    }
        order:any;
        assign(washerName:string){
         this.id = (this.router.snapshot.paramMap.get('id') as string);
@@ -50,13 +50,9 @@ export class AssignWasherComponent implements OnInit {
            icon: 'error',
           title: 'Oops...',
           text: 'washer already assigned/ server error! Try again',
-         
-          })
-         return "server error";
-           }))
-      .subscribe(order=>{
-      console.log(order); 
-     })
-          }
+         })
+         return "server error";}))
+        .subscribe(order=>{console.log(order);})
+        }
 
 }

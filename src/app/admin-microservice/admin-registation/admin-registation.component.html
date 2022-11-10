@@ -23,7 +23,7 @@
             <i class="fas fa-user"></i>
            <input type="email" placeholder="Email" formControlName="email" [(ngModel)]="adminDetails.email">
            <small [class.d-none]="RegistrationForm.controls['email'].valid||RegistrationForm.controls['email'].untouched" class="text-danger">
-            provide valid email address
+            provide valid email address in lowercase
           </small>
           </div>
           <div class="row">

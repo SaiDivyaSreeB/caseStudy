@@ -29,8 +29,7 @@ export class CustomerService {
     let url=`http://localhost:8093/users/seeWp`
     return this.http.get(url);
   }
-  getPendingOrders(email:String){
-
+  getOrders(email:String){
     let url =`http://localhost:8093/orders/findMyOrders/${email}`
     return this.http.get(url);
   }

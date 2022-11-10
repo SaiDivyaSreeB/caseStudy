@@ -6,11 +6,12 @@ import { WasherRegistrationComponent } from './washer-registration/washer-regist
 import { WasherLoginComponent } from './washer-login/washer-login.component';
 import { WasherOrdersComponent } from './washer-orders/washer-orders.component';
 import { UnassignedOrdersComponent } from './unassigned-orders/unassigned-orders.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RatingsComponent } from './ratings/ratings.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
    WasherComponent,
@@ -26,7 +27,9 @@ import { RatingsComponent } from './ratings/ratings.component';
     ReactiveFormsModule,
     MatCardModule,
     MatDividerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ]
 })
 export class WasherMicroserviceModule { }
