@@ -12,13 +12,14 @@ describe('AdminComponent', () => {
   let http:HttpClient;
   beforeEach(()=>{
     service= new AdminService(http);
-    authService= jasmine.createSpyObj('AdminauthService',['getRole','getAdminName','getAdminEmail','getId','updateName','logout']);
+    authService= jasmine.createSpyObj('AdminauthService',['getRole','getAdminName','getAdminEmail','getId','updateName','logout','getProfilePic','updateProfile']);
     component=new AdminComponent(authService,service);
   })
   fit('ngOnInit',()=>{
     authService.getRole.and.returnValue('ADMIN');
     authService.getAdminEmail.and.returnValue('abc@gmail.com');
     authService.getAdminName.and.returnValue('abc');
+    authService.getProfilePic.and.returnValue("");
     component.ngOnInit();
     expect(component.role).toBe('ADMIN');
     expect(component.adminEmail).toBe('abc@gmail.com');

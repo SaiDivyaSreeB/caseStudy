@@ -15,7 +15,6 @@ const routes: Routes = [
   [
   //{path:'dashboard',component:CustomerDashboardComponent},
    //{path:'login',component:CustomerLoginComponent},
-  
   // /{path:'register',component:CustomerRegistrationComponent},
   {path:'placeOrder',component:PlaceOrderComponent,canActivate:[CustomerauthGuardService]},
   {path:'pendingOrders',component:PendingOrdersComponent,canActivate:[CustomerauthGuardService]},
@@ -23,7 +22,9 @@ const routes: Routes = [
   {path:'viewWashpacks',component:ViewWashpacksComponent,canActivate:[CustomerauthGuardService]},
   {path:'placeOrder/:id',component:PlaceOrderComponent,canActivate:[CustomerauthGuardService]},
   ]
-}
+},
+{path:'customerRegister',component:CustomerRegistrationComponent},
+{path:'customerLogin',component:CustomerLoginComponent},
 ];
 
 @NgModule({

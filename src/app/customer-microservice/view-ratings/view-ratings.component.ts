@@ -1,4 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CustomerauthService } from 'src/app/services/customerauth.service';
 import { RatingInfo } from './RatingInfo';
@@ -9,6 +12,8 @@ import { RatingInfo } from './RatingInfo';
   styleUrls: ['./view-ratings.component.css']
 })
 export class ViewRatingsComponent implements OnInit {
+  error:boolean=false;
+  errorType:any;
   p:number=1;
   ratings:any=[]
   rate=3;
@@ -19,7 +24,7 @@ export class ViewRatingsComponent implements OnInit {
     rating:0,
   }
   i:any =1;
-  constructor(private customer:CustomerService,private customerAuth:CustomerauthService) {
+  constructor(private customer:CustomerService,private customerAuth:CustomerauthService,private router:Router) {
   }
    fu(){
     this.i=this.i+1;
@@ -31,7 +36,20 @@ export class ViewRatingsComponent implements OnInit {
 role:any
   ngOnInit(): void {
     this.role=this.customerAuth.getRole();
-    this.customer.viewRatings().subscribe((Ratings)=>{
+    this.customer.viewRatings()
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+          sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)})))
+    .subscribe((Ratings)=>{
     this.ratings=Ratings
     console.log(this.ratings);
       })

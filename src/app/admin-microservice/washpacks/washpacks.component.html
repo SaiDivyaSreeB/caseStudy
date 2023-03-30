@@ -7,10 +7,14 @@
  <!-- <div *ngIf="role!='ADMIN';else elseblock">
   <h1 style="color:black">You must be admin to access this page</h1>
 </div> -->
-<div *ngIf="role!='ADMIN';else elseblock">
-  <h2>You must be admin to access this page. Logout and login as user</h2>
+<div *ngIf="role!='ADMIN'&&!error">
+  <h2>You must be admin to access this page. Logout and login as admin</h2>
 </div>
-<ng-template #elseblock>
+<div *ngIf="error&&errorType=='server error'">
+  <h2>Server Error!</h2>
+</div>
+<!-- <ng-template #elseblock> -->
+<div *ngIf="!error&&role=='ADMIN'">
   <div id="washpack">
     <h1 style="margin-top:20px">Available Washpacks</h1>
     <div *ngFor="let washpack of washpacks let i=index" id="pack"style="margin-top:20px"> <!-- style="width: 30rem"-->
@@ -108,4 +112,5 @@
 </form>
 </div>
 </div>
-</ng-template>
+<!-- </ng-template> -->
+</div>

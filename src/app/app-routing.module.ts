@@ -14,16 +14,17 @@ import { WasherComponent } from './washer-microservice/washer/washer.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
-  {path:'adminLogin',component:AdminLoginComponent},
-  {path:'customerLogin',component:CustomerLoginComponent},
-  {path:'washerLogin',component:WasherLoginComponent},
+  // {path:'adminLogin',component:AdminLoginComponent},
+  // {path:'customerLogin',component:CustomerLoginComponent},
+  // {path:'washerLogin',component:WasherLoginComponent},
   //{path:'adminRegister',component:AdminRegistationComponent,canActivate:[AdminauthGuardService]},
-  {path:'washerRegister', component:WasherRegistrationComponent},
-  {path:'customerRegister',component:CustomerRegistrationComponent},
+  // {path:'washerRegister', component:WasherRegistrationComponent},
+  // {path:'customerRegister',component:CustomerRegistrationComponent},
   {path:'home',component:HomeComponent},
-  {path:'washer',component:WasherComponent},
- {path:'customer',component:CustomerComponent},
-{path:'admin',component:AdminComponent}];
+  // {path:'washer',component:WasherComponent},
+//  {path:'customer',component:CustomerComponent},
+// 
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

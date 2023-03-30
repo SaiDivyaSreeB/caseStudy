@@ -1,13 +1,13 @@
 import { Component, OnInit,HostListener} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
+import { catchError, first, throwError } from 'rxjs';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CustomerauthService } from 'src/app/services/customerauth.service';
 import Swal from 'sweetalert2';
 import { Car } from './CarInfo';
 import { OrderInfo } from './OrderInfo';
-import{HttpClient}from'@angular/common/http';
+import{HttpClient, HttpErrorResponse}from'@angular/common/http';
 declare var Razorpay:any;
 @Component({
   selector: 'app-place-order',
@@ -63,7 +63,7 @@ export class PlaceOrderComponent implements OnInit {
   })
 
   role:any;
-  constructor(private http :HttpClient,private customer:CustomerService,private customerAuth:CustomerauthService, private route:ActivatedRoute) {
+  constructor(private http :HttpClient,private customer:CustomerService,private customerAuth:CustomerauthService, private route:ActivatedRoute, private router:Router) {
    this.role=this.customerAuth.getRole();
     this.mail=this.customerAuth.getCustomerEmail();
    this.order.userEmailId=this.mail;
@@ -123,7 +123,16 @@ confirm():void{
     console.log(this.washpack);
     console.log(this.order);
     this.form.name=String(this.customerAuth.getCustomerName());
-    this.customer.getWashpackCost(this.washpack).subscribe((cost)=>{
+    this.customer.getWashpackCost(this.washpack)
+    .pipe(catchError((err:HttpErrorResponse)=>{
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)
+    }))
+    .subscribe((cost)=>{
       this.washpackCost=cost;
       this.form.cost=this.washpackCost;
       this.form.mail=String(this.order.userEmailId);

@@ -1,7 +1,8 @@
-<div *ngIf="role=='WASHER';else elseblock">
+<div *ngIf="role!='USER'">
   <h2> Logout and login as user.</h2>
 </div>
-<ng-template #elseblock>
+<!-- <ng-template #elseblock> -->
+<div *ngIf="role=='USER'">
 <div class="container"style="overflow:auto;height:100%">
 
   <div class="form"style="overflow:auto;padding-top:5px;height:auto">
@@ -101,4 +102,5 @@
 </div>
   </div>
 </div>
-</ng-template>
+</div>
+<!-- </ng-template> -->

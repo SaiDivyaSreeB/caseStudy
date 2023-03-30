@@ -34,4 +34,8 @@ export class WasherService {
     let url=`http://localhost:8093/users/getAllRatings`
     return this.http.get(url);
   }
+  updatePicRating(user:Object){
+    let url=`http://localhost:8093/users/updatePic`
+    return this.http.post(url,user);
+  }
 }

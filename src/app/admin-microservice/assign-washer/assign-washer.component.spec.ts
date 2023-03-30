@@ -9,6 +9,7 @@ import { getHeapSnapshot } from 'v8';
 describe('AssignWasherComponent', () => {
   let component: AssignWasherComponent;
   let router: any;
+  let route:Router;
   let service:jasmine.SpyObj<AdminService>;
   const washers:any=[
     {"email":"ramya@gmail.com","fullname":"Ramya"},
@@ -32,7 +33,7 @@ describe('AssignWasherComponent', () => {
     router=new ActivatedRoute();
     service=jasmine.createSpyObj('AdminService',['getWashers','assignWasher']);
    // router=jasmine.createSpyObj('ActivatedRoute',['snapshot',['paramMap',['get']]]);
-    component=new AssignWasherComponent(service,router);
+    component=new AssignWasherComponent(service,router,route);
   })
   fit('should return washers',()=>{
     service.getWashers.and.returnValue(of(washers));

@@ -11,12 +11,13 @@ describe('WasherComponent', () => {
   let http:HttpClient;
   beforeEach(()=>{
     service= new WasherService(http);
-    authService= jasmine.createSpyObj('WasherauthService',['getWasherName','getWasherEmail','logout']);
+    authService= jasmine.createSpyObj('WasherauthService',['getWasherName','getWasherEmail','logout','getProfilePic']);
     component=new WasherComponent(authService,service);
   })
   fit('ngOnInit',()=>{
     authService.getWasherEmail.and.returnValue('abc@gmail.com');
     authService.getWasherName.and.returnValue('abc');
+    authService.getProfilePic.and.returnValue("");
     component.ngOnInit();
     expect(component.washerEmail).toBe('abc@gmail.com');
     expect(component.washerName).toBe('abc');

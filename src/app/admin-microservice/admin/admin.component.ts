@@ -56,9 +56,7 @@ export class AdminComponent implements OnInit {
     this.user.image=event.target.result;
 
     console.log(this.user.image);
-     //console.log()
-      //let a=document.getElementById('image') as HTMLElement
-    // a.style.backgroundImage='url('+this.user.image+')';
+  
        }
       reader.readAsDataURL(e.target.files.item(0));
     }

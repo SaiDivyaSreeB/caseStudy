@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminauthService } from 'src/app/services/adminauth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-washpacks',
   templateUrl: './washpacks.component.html',
   styleUrls: ['./washpacks.component.css']
 })
 export class WashpacksComponent implements OnInit {
+  error:any=false;
+  errorType:any;
   washpacks:any=[];
   washpack:any;
   url="./assets/Images/logo.jpg"
@@ -44,7 +47,7 @@ export class WashpacksComponent implements OnInit {
     packDescription: new FormControl('',Validators.required),
     // image:new FormControl('',Validators.required)
   })
-  constructor(private admin:AdminService,private adminAuth:AdminauthService) {
+  constructor(private admin:AdminService,private adminAuth:AdminauthService,private router:Router) {
     
     // this.admin.getWashPacks().subscribe((washpacks)=>{
     //   this.washpacks=washpacks;
@@ -54,11 +57,25 @@ export class WashpacksComponent implements OnInit {
   role:any;
   ngOnInit(): void {
     this.role=this.adminAuth.getRole();
-    this.admin.getWashPacks().subscribe((washpacks)=>{
+    this.admin.getWashPacks()
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/adminLogin']);
+      }
+      return throwError(()=>err)})))
+    .subscribe((washpacks)=>{
       this.washpacks=washpacks;
+      console.log(this.washpacks);
   })
   }
-error:any;
+// error:any;
   deleteWashpack(id:String,i:number){//,i:number
 
      /* let res =*/ this.admin.deleteWashpack(id)

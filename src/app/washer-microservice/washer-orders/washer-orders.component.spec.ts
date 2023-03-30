@@ -4,10 +4,12 @@ import { WasherService } from 'src/app/services/washer.service';
 import { WasherauthService } from 'src/app/services/washerauth.service';
 import { WasherOrdersComponent } from './washer-orders.component';
 import {HttpErrorResponse} from '@angular/common/http';
+import { Router } from '@angular/router';
 describe('WasherOrdersComponent', () => {
   let component: WasherOrdersComponent;
   let service:jasmine.SpyObj<WasherService>;
   let authService:jasmine.SpyObj<WasherauthService>;
+  let router:Router;
   const orders:any=[
 {
   orderId:"c",
@@ -27,7 +29,7 @@ describe('WasherOrdersComponent', () => {
   beforeEach(()=>{
     service=jasmine.createSpyObj('WasherService',['getPendingOrders','rejectOrder','updateStatus']);
     authService=jasmine.createSpyObj('WasherauthService',['getWasherName','getRole']);
-    component=new WasherOrdersComponent(service,authService);
+    component=new WasherOrdersComponent(service,authService,router);
   })
   fit('ngOnInit when orders count is zero',()=>{
     const orders:any=[];

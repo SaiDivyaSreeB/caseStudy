@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
-import { ActivatedRoute } from '@angular/router';
-import { catchError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
@@ -13,17 +13,32 @@ import Swal from 'sweetalert2';
 })
 
 export class AssignWasherComponent implements OnInit {
+  error:boolean=false;
+  errorType:any;
   washers:any=[];
   fullname:any;
   id:any;
   
   name:string="";
-  constructor(private admin:AdminService, private router:ActivatedRoute) {
+  constructor(private admin:AdminService, private router:ActivatedRoute, private route:Router) {
    
   }
  
   ngOnInit(): void {
-    this.admin.getWashers().subscribe((washers)=>{
+    this.admin.getWashers()
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.route.navigate(['/adminLogin']);
+      }
+      return throwError(()=>err)})))
+    .subscribe((washers)=>{
       this.washers=washers;
       console.log(this.washers);
     })

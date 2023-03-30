@@ -24,7 +24,8 @@ const routes: Routes = [
       // {path:'assignWasher/:id','component':AssignWasherComponent},
       {path:'unassigned/:id',component:AssignWasherComponent},
     ]
-  }
+  },
+  {path:'adminLogin',component:AdminLoginComponent},
 ];
 
 @NgModule({

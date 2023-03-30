@@ -3,6 +3,8 @@ import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AdminauthService } from 'src/app/services/adminauth.service';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-unassigned',
   templateUrl: './unassigned.component.html',
@@ -10,6 +12,8 @@ import { AdminauthService } from 'src/app/services/adminauth.service';
 })
 
 export class UnassignedOrdersComponent implements OnInit {
+  error:boolean=false;
+  errorType:any;
   p:number=1;
   orders:any=[];
   orderCount:any;
@@ -35,7 +39,22 @@ export class UnassignedOrdersComponent implements OnInit {
 role:any;
   ngOnInit(): void {
     this.role=this.adminAuth.getRole();
-    this.admin.getUnassignedOrders().subscribe((orders)=>{
+    this.admin.getUnassignedOrders()
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        this.errorType="unauthorised error"
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/adminLogin']);
+      }
+      return throwError(()=>err)})))
+   
+    .subscribe((orders)=>{
       this.orders=orders;
       console.log(orders);
       if(this.orders.length==0){

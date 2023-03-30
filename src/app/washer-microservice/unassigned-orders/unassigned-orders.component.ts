@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { catchError } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { WasherService } from 'src/app/services/washer.service';
 import { WasherauthService } from 'src/app/services/washerauth.service';
 import Swal from 'sweetalert2';
@@ -11,13 +12,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./unassigned-orders.component.css']
 })
 export class UnassignedOrdersComponent implements OnInit {
+  error:boolean=false;
+  errorType:any;
   p:number=1;
   orders:any=[];
   washerName:any;
   orderCount:any;
   flag:any;
   role:any;
-  constructor(private washer:WasherService,private washerAuth:WasherauthService) { 
+  constructor(private washer:WasherService,private washerAuth:WasherauthService,private router:Router) { 
 //     this.role=this.washerAuth.getRole();
 //     this.washer.getUnassigned().subscribe((orders)=>{
 //       this.orders=orders;
@@ -38,7 +41,21 @@ export class UnassignedOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.role=this.washerAuth.getRole();
-    this.washer.getUnassigned().subscribe((orders)=>{
+    this.washer.getUnassigned()
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        this.errorType="unauthorised error"
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/washerLogin']);
+      }
+      return throwError(()=>err)})))
+    .subscribe((orders)=>{
       this.orders=orders;
       console.log(orders);
       if(this.orders.length==0){

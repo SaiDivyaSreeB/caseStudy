@@ -6,7 +6,8 @@ import { OrderInfo } from './OrderInfo';
 import { AnyForUntypedForms, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending-orders',
@@ -15,6 +16,8 @@ import { catchError } from 'rxjs';
 })
 
 export class PendingOrdersComponent implements OnInit {
+  error:boolean=false;
+  errorType:any;
   p:number=1;
   washpack:any;
   orderCount:any;
@@ -39,6 +42,7 @@ export class PendingOrdersComponent implements OnInit {
     addon:"",
      }
      Rating={
+      image:"",
       washerName:"",
       comments:"",
       rating:0
@@ -61,13 +65,26 @@ export class PendingOrdersComponent implements OnInit {
       }
      )
  
-  constructor(private customer:CustomerService, private customerAuth:CustomerauthService) {
+  constructor(private customer:CustomerService, private customerAuth:CustomerauthService,private router:Router) {
 }
 role:any;
   ngOnInit(): void {
     this.role=this.customerAuth.getRole();
     this.email=this.customerAuth.getCustomerEmail();
-    this.customer.getOrders(this.email).subscribe((orders)=>{
+    this.customer.getOrders(this.email)
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)})))
+    .subscribe((orders)=>{
       this.orders=orders;
       if(this.orders.length==0){
            this.orderCount=this.orders.length;
@@ -130,6 +147,18 @@ role:any;
 
   done(order:Object){
      this.customer.cancelOrder(order)
+     .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)})))
      //.pipe(catchError((err:HttpErrorResponse)=>{
     //   Swal.fire({
     //   position : 'top-end',
@@ -164,6 +193,18 @@ role:any;
 
    updateOrder(OrderId:String,Order:Object){
     this.customer.updateOrder(OrderId,Order)
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)})))
      .subscribe({
       next:(updatedOrder)=>{
     console.log(updatedOrder)
@@ -246,6 +287,18 @@ role:any;
   addRatingComment(){
     console.log(this.Rating);
     this.customer.giveRatingComment(this.Rating)
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)})))
      .subscribe({
       next:(response)=>{
       console.log(response);

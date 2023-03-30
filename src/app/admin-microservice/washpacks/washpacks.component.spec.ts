@@ -6,6 +6,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AdminauthService } from 'src/app/services/adminauth.service';
 import {of} from 'rxjs';
 import { WashpacksComponent } from './washpacks.component';
+import { Router } from '@angular/router';
 
 fdescribe('WashpacksComponent', () => {
   let component!: WashpacksComponent;
@@ -13,10 +14,11 @@ fdescribe('WashpacksComponent', () => {
   let service! : AdminService;
   let adminAuth!:jasmine.SpyObj<AdminauthService> ;
   let http: HttpClient;
+  let router:Router;
   beforeEach(()=>{
     adminAuth=jasmine.createSpyObj('AdminauthService',['getRole']);
     service= new AdminService(http);
-     component=new WashpacksComponent(service,adminAuth);
+     component=new WashpacksComponent(service,adminAuth,router);
      
   })
   const washpacks:any=[

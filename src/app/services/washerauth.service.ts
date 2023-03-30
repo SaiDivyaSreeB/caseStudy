@@ -43,7 +43,7 @@ export class WasherauthService {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Wrong Credentials! or server eeror, Try Again',
+            text: 'Wrong Credentials! or server error, Try Again',
           })
           this.router.navigate(['/washerLogin']);
         }})

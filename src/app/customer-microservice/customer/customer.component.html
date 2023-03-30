@@ -19,7 +19,7 @@
           
         </div>
         <div class="main_content">
-            <div class="header">Welcome {{customerName}}!! Have a nice day.
+            <div class="header"><span style="font-weight: bold;">Welcome {{customerName}}!!</span> Have a nice day.
             <span>
                 <div class="dropdown my-menu" >
                   <div class="alignment">
@@ -41,7 +41,7 @@
                    <li style="text-align:center;"><img src="/assets/Images/delete.jpg" style="border-radius:100%;width:27px;height:27px;text-align: center;"(click)="deletePic()"></li>
                         <li style="text-align: center;">{{customerName}}</li>
                         <li style="text-align: center;">{{customerEmail}}</li>
-                          <li><a class="dropdown-item"  aria-labelledby="dropdownMenuLink">Edit nmae :</a></li>
+                          <li><a class="dropdown-item"  aria-labelledby="dropdownMenuLink">Edit name :</a></li>
                           <form [formGroup]="editProfileForm">
                             <div class="row">
                              <input type="text" placeholder="Fullname" formControlName="Fullname" [(ngModel)]="user.fullname"style="padding-top:5px">

@@ -1,20 +1,23 @@
 <!-- <div *ngIf="role!='ADMIN'">
 
 </div> -->
-<div *ngIf="(role!='ADMIN')">
+<div *ngIf="(role!='ADMIN')&&errorType=='unauthorised error'">
   <!-- <img src="\assets\Images\emptyCart.png"class="cartempty"> -->
-  
-    <h2>You must be admin to access this page. Logout and login as user.</h2>
+  <h2>login as admin</h2>
   <!-- <h1>No pending orders</h1> -->
 </div>
-<div *ngIf="flag&&(role=='ADMIN')">
+<div *ngIf="flag&&(role=='ADMIN')&&!error">
   <!-- <img src="\assets\Images\emptyCart.png"class="cartempty"> -->
   <img src="\assets\Images\logo.jpg"class="cartempty">
     <h1 style="color:black">No unassigned orders</h1>
   <!-- <h1>No pending orders</h1> -->
 </div>
+<div *ngIf="error&&errorType=='server error'">
+  <h2>Server error!</h2>
+</div>
 <!-- <ng-template #elseblock> -->
-<div *ngIf="!flag&&(role=='ADMIN')">
+<!-- <div *ngIf="!error&&role=='ADMIN'"> -->
+<div *ngIf="!flag&&(role=='ADMIN')&&!error">
 <h1 style="text-align: center;">Unassigned orders</h1>
 <div class="container">
     <div class="row"style="margin-left:65px">
@@ -50,5 +53,6 @@
   <div style="padding-top:50px">
     <pagination-controls (pageChange)="p=$event"style="text-align:center"></pagination-controls>
   </div> 
-<!-- </ng-template> -->
 </div>
+<!-- </ng-template> -->
+<!-- </div> -->

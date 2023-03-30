@@ -1,7 +1,11 @@
-<div *ngIf="role=='WASHER';else elseblock">
+<div *ngIf="role!='USER'&&!error">
   <h2> Logout and login as user.</h2>
 </div>
-<ng-template #elseblock>
+<div *ngIf="error&&errorType=='server error'">
+    <h2>Server error!</h2>
+</div>
+<!-- <ng-template #elseblock> -->
+<div *ngIf="!error&&role=='USER'">
 <nav class="navbar">
   <input class="form-control" type="text" name="washerName" [(ngModel)]="washerName" (ngModelChange)="Search()" placeholder="Enter washer name to search">
 </nav>
@@ -11,9 +15,9 @@
       <div class="card mx-auto"style="width:70rem">
         <div class="card-body">
           <h2 class="card-title">{{rating.washerName}}</h2>
+          <img src="{{rating.image}}"style="width:80px;height:80px">
           <p class="card-text">{{rating.comments}}</p>
           <!-- <a href="#" class="btn btn-primary">{{rating.ratings}}</a> -->
-          <p class="card-text">{{rating.rating}} </p>
             <div *ngFor="let in of counter(rating.rating);let i=index"id="container">
                 <div class="some-class"><img src="assets/Images/star_2b50.png" width=18px alt="Close"> </div>
             </div>
@@ -26,6 +30,5 @@
 <div style="padding-top:50px">
   <pagination-controls (pageChange)="p=$event"style="text-align:center"></pagination-controls>
   </div>  
-</ng-template>
-
-
+<!-- </ng-template> -->
+</div>

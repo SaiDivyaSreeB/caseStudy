@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <div *ngIf="role=='WASHER'">
+    <div *ngIf="role!='USER'&&!error">
       <h2> Logout and login as user.</h2>
     </div>
-  <div *ngIf="flag&&(role!='WASHER')">
+    <div *ngIf="error&&errorType=='server error'">
+      <h2>Server error!</h2>
+     </div>
+  <div *ngIf="flag&&(role=='USER')&&!error">
     <img src="\assets\Images\logo.jpg"class="cartempty">
     <h1>No orders exist</h1>
   </div>
- 
-  <div *ngIf="!flag&&(role!='WASHER')">
+  <div *ngIf="!flag&&(role=='USER')&&!error">
     <nav class="navbar">
       <input class="form-control" type="text" name="washerpack" [(ngModel)]="washpack" (ngModelChange)="Search()" placeholder="Enter washpack to search">
     </nav>
@@ -23,6 +25,7 @@
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <p class="card-text">Order Id: {{order.orderId}}</p>
         <p class="card-text">User Email: {{order.userEmailId}}</p>
+        <p class="card-text">Washer : {{order.washerName}}</p>
         <p class="card-text">Washpack: {{order.washpack}}</p>
         <p class="card-text">Phone: {{order.phoneNo}}</p>
         <p class="card-text">Address: {{order.areapincode}}</p>
@@ -91,7 +94,7 @@
          </button>
          <br>
          <br>
-        <button type="button" class="btn btn-primary" (click)="addRatingComment()">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="addRatingComment()" [disabled]="ratingform.invalid">Submit</button>
       </div>
       </div>
 </body>

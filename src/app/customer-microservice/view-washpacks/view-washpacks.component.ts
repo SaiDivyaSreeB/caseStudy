@@ -3,6 +3,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { Router } from '@angular/router';
 import { CustomerauthGuardService } from 'src/app/services/customerauth-guard.service';
 import { CustomerauthService } from 'src/app/services/customerauth.service';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-view-washpacks',
@@ -10,6 +12,8 @@ import { CustomerauthService } from 'src/app/services/customerauth.service';
   styleUrls: ['./view-washpacks.component.css']
 })
 export class ViewWashpacksComponent implements OnInit {
+  error:boolean=false;
+  errorType:any;
 Washpacks:any=[];
 washpack={
   name:"",
@@ -27,7 +31,20 @@ wordLimit:number=15;
 
   ngOnInit(): void {
     this.role=this.customerAuth.getRole();
-    this.customer.getPacks().subscribe((washpacks)=>{
+    this.customer.getPacks()
+    .pipe((catchError((err:HttpErrorResponse)=>{
+      this.error=true;
+      if(err.status==500 || err.status==503){
+        this.errorType="server error";
+        console.log(this.errorType)
+      }
+      if(err.status==403){
+        console.log("session expired");
+        sessionStorage.clear();
+       this.router.navigate(['/customerLogin']);
+      }
+      return throwError(()=>err)})))
+    .subscribe((washpacks)=>{
       this.Washpacks=washpacks;
       console.log(this.Washpacks);
     })

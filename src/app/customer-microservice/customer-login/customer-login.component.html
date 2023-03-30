@@ -7,14 +7,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
   </head>
   <body>
-    <div class="parent">
-     <div class="child"style="overflow:auto;justify-content: center;">
-     <div class="insidechild"style="align-items:center;overflow:auto;">
-        <h1 >Login to continue</h1>
-      <div class="imgcontainer">
-        <img src="\assets\Images\loginImage.webp" alt="login image"style="height:400px;width:450px">
+    <div class="wrapper">
+ 
+      <div class="sidebar">
+          <h2>Menu</h2>
+      
+         <ul>
+          <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+          <li><a routerLink="/customer/placeOrder">Place Order</a></li>
+          <li><a routerLink="/customer/pendingOrders">My Orders</a></li>
+          <li><a routerLink="/customer/viewRatings">View Ratings</a></li>
+          <li><a routerLink="/customer/viewWashpacks">Services</a></li>
+     </ul> 
       </div>
-      <div class="wrapper">
+    </div>
+    <div class="parent">
+     <div class="child"style="overflow:auto;justify-content: center;padding-left:360px;">
+     <div class="insidechild"style="align-items:center;overflow:auto;">
+        <h1 >Login as customer to continue</h1>
+      <div class="imgcontainer">
+        <img src="\assets\Images\login.jpeg" alt="login image"style="height:400px;width:300px">
+      </div>
+      <div class="wrapper2">
         <div class="title"><span>Login Form</span></div>
         <form [formGroup]="LoginForm">
           <div class="row">

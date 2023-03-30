@@ -3,11 +3,13 @@ import { WasherService } from 'src/app/services/washer.service';
 import { WasherauthService } from 'src/app/services/washerauth.service';
 import {of} from 'rxjs';
 import { UnassignedOrdersComponent } from './unassigned-orders.component';
+import { Router } from '@angular/router';
 
 describe('UnassignedOrdersComponent', () => {
   let component: UnassignedOrdersComponent;
   let authService:jasmine.SpyObj<WasherauthService>;
   let service:jasmine.SpyObj<WasherService>;
+  let router:Router;
   const orders:any=[
     {
       orderId:"a",
@@ -57,7 +59,7 @@ describe('UnassignedOrdersComponent', () => {
   beforeEach(()=>{
     service=jasmine.createSpyObj('WasherService',['getUnassigned','assignHimself']);
     authService=jasmine.createSpyObj('WasherauthService',['getWasherName','getRole']);
-    component=new UnassignedOrdersComponent(service,authService);
+    component=new UnassignedOrdersComponent(service,authService,router);
   })
 fit('ngOnInit for orders count zero',()=>{
   const orders:any=[];

@@ -5,11 +5,13 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { CustomerauthService } from 'src/app/services/customerauth.service';
 import {of} from 'rxjs';
 import { ViewRatingsComponent } from './view-ratings.component';
+import { Router } from '@angular/router';
 
 describe('ViewRatingsComponent', () => {
   let component: ViewRatingsComponent;
   let authService:jasmine.SpyObj<CustomerauthService>;
-  let service:jasmine.SpyObj<CustomerService>
+  let service:jasmine.SpyObj<CustomerService>;
+  let router:Router;
   const ratings=[{
     id:"a",
     washerName:"Ramya",
@@ -25,7 +27,7 @@ describe('ViewRatingsComponent', () => {
   beforeEach(()=>{
     service=jasmine.createSpyObj('CustomerService',['viewRatings']);
     authService=jasmine.createSpyObj('CustomerauthService',['getRole']);
-    component=new ViewRatingsComponent(service,authService);
+    component=new ViewRatingsComponent(service,authService,router);
   })
   fit('ngOninit',()=>{
     service.viewRatings.and.returnValue(of(ratings));

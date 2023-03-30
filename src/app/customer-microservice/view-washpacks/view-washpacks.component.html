@@ -1,9 +1,13 @@
-<div *ngIf="role=='WASHER';else elseblock">
+<div *ngIf="role!='USER'&&!error">
   <h2> Logout and login as user.</h2>
 </div>
+<div *ngIf="error&&errorType=='server error'">
+  <h2>Server error!</h2>
+ </div>
 <!-- <div class="container"style="padding:90px"> -->
     <!--<div class="row"> -->
-<ng-template #elseblock>
+<!-- <ng-template #elseblock> -->
+<div *ngIf="!error&&role=='USER'">
       <h1>Washpacks</h1>
       <!-- <div *ngFor=" let rating of ratings let i= index"> -->
         <div *ngFor="let washpack of Washpacks let i=index">
@@ -39,6 +43,6 @@
           </div>
         </div>
       </div>
-    </ng-template>
-   <!-- </div> -->
+    <!-- </ng-template> -->
+   </div>
 <!-- </div> -->

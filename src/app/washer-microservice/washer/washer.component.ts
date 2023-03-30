@@ -40,6 +40,11 @@ export class WasherComponent implements OnInit {
       console.log(response);
       this.washerAuth.updateProfilePic(this.washerData.image);
     });
+    this.washer.updatePicRating(this.washerData).subscribe(
+      (ratings)=>{
+        console.log(ratings);
+      }
+    )
    }
    onselectFile(e:any,type:String){
     if(e.target.files){

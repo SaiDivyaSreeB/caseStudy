@@ -11,13 +11,14 @@ const routes:Routes=[
   {
     path:'washer',component:WasherComponent,
     children:[
-      //{path:'login',component:WasherLoginComponent},
-      //{path:'register', component:WasherRegistrationComponent},
+     
       {path:'myOrders',component:WasherOrdersComponent,canActivate:[WasherauthGuardService]},
       {path:'unassignedOrders',  component:UnassignedOrdersComponent,canActivate:[WasherauthGuardService]},
       {path:'ratings',component:RatingsComponent,canActivate:[WasherauthGuardService]}
     ]
-  }
+  },
+   {path:'washerLogin',component:WasherLoginComponent},
+      {path:'washerRegister', component:WasherRegistrationComponent},
 ];
 @NgModule({
   imports: [

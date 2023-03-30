@@ -54,13 +54,14 @@ logout(){
   }
   onselectFile(e:any,type:String){
     if(e.target.files){
+      console.log(e.target.files);
       var reader = new FileReader();
-      console.log(e.target.files[0]);
+      //console.log(e.target.files[0]);
       reader.onload=(event:any)=>{
     this.user.image=event.target.result;
-    console.log(this.user.image);
+    //console.log(this.user.image);
        }
-      reader.readAsDataURL(e.target.files.item(0));
+       reader.readAsDataURL(e.target.files.item(0));
     }
     }
     deletePic(){

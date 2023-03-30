@@ -12,7 +12,7 @@ describe('CustomerComponent', () => {
   let http:HttpClient;
   beforeEach(()=>{
     service= new CustomerService(http);
-    authService= jasmine.createSpyObj('AdminauthService',['getCustomerEmail','getCustomerName','getCustomerId','updateName','logout']);
+    authService= jasmine.createSpyObj('CustomerauthService',['getProfilePic','getCustomerEmail','getCustomerName','getCustomerId','updateName','logout','updateProfile']);
     component=new CustomerComponent(authService,service);
   })
   fit('ngOnInit',()=>{
@@ -35,6 +35,7 @@ describe('CustomerComponent', () => {
       roles:[{id:"",role:"USER"}]
      }
     authService.getCustomerId.and.returnValue('a');
+    authService.getProfilePic.and.returnValue("");
      spyOn(service,'updateProfile').and.callFake(()=>{
       return from([updatedUser]);
     })

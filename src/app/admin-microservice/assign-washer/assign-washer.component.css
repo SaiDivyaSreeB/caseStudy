@@ -1,3 +1,8 @@
 td,th{
     text-align: center;
+ transition: .3s ;
+}
+td:hover, th:hover{
+   transform: scale(1.05);
+  
 }

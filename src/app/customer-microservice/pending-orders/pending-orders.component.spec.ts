@@ -8,12 +8,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PendingOrdersComponent } from './pending-orders.component';
 import { Component } from '@angular/core';
 import Swal, { SweetAlertCustomClass } from 'sweetalert2';
+import { Router } from '@angular/router';
 
 describe('PendingOrdersComponent', () => {
   let component: PendingOrdersComponent;
   let service : jasmine.SpyObj<CustomerService>;
   let authService:jasmine.SpyObj<CustomerauthService>;
-  
+  let router:Router;
   const orders:any=[
     {
       orderId:"a",
@@ -80,7 +81,7 @@ const Updatedorder:any=
 beforeEach(()=>{
   service=jasmine.createSpyObj('AdminService',['getOrders','cancelOrder','updateOrder','giveRatingComment']);
   authService= jasmine.createSpyObj('CustomerauthService',['getRole','getCustomerEmail']);
-  component=new PendingOrdersComponent(service,authService);
+  component=new PendingOrdersComponent(service,authService,router);
 })
 fit('ngOninit when atleast one order exist',()=>{
   authService.getRole.and.returnValue("USER");
